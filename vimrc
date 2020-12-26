@@ -11,6 +11,11 @@ Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
 Plug 'ncm2/ncm2-jedi'
 Plug 'ncm2/ncm2-path'
+" Conjure for Clojure
+Plug 'Olical/conjure', {'tag': 'v4.10.0'}
+Plug 'clojure-vim/vim-jack-in'
+Plug 'tpope/vim-dispatch'
+Plug 'radenling/vim-dispatch-neovim'
 call plug#end()
 
 " ncm2 settings
