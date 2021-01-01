@@ -10,8 +10,11 @@ Plug 'Olical/conjure', {'tag': 'v4.10.0'}
 Plug 'clojure-vim/vim-jack-in'
 Plug 'tpope/vim-dispatch'
 Plug 'radenling/vim-dispatch-neovim'
+" Deoplete and Ale
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi'
+Plug 'tweekmonster/deoplete-clang2'
+Plug 'dense-analysis/ale'
 call plug#end()
 
 " Deoplete
