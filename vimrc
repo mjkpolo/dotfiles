@@ -10,20 +10,45 @@ Plug 'Olical/conjure', {'tag': 'v4.10.0'}
 Plug 'clojure-vim/vim-jack-in'
 Plug 'tpope/vim-dispatch'
 Plug 'radenling/vim-dispatch-neovim'
-" Deoplete and Ale
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'zchee/deoplete-jedi'
-Plug 'tweekmonster/deoplete-clang2'
+" COC, Ale, and Nerdtree
+Plug 'preservim/nerdtree'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dense-analysis/ale'
 call plug#end()
 
-" Deoplete
-let g:deoplete#enable_at_startup = 1
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
 " fzf
 map ; :Files<CR>
+
+" Nerdtree
+nnoremap <C-n> :NERDTreeToggle<CR>
+
+" COC.nvim
+set hidden
+set nobackup
+set nowritebackup
+set cmdheight=2
+set updatetime=300
+set shortmess+=c
+set signcolumn=yes
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+nmap <silent> gd <Plug>(coc-definition)
+nmap <leader>rn <Plug>(coc-rename)
 
 " Theme
 colorscheme zenburn
@@ -33,8 +58,7 @@ set termguicolors
 " Tagbar
 map <C-b> :TagbarToggle<CR>
 
-
-" geohot config
+" borrowed geohot config
 syntax on
 set expandtab
 set tabstop=2
@@ -51,9 +75,6 @@ set mouse=a
 
 autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
-autocmd filetype java nnoremap <F5> :w <bar> !cd %:h && javac *.java <CR>
-autocmd filetype java nnoremap <F9> :w <bar> !cd %:h && java %:t:r <CR>
-autocmd filetype java nnoremap <F11> :w <bar> !cd %:h && ant compile jar run <CR>
 
 augroup numbertoggle
 	autocmd!
