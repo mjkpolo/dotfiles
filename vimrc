@@ -2,9 +2,10 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'jnurmine/Zenburn'
+" Theme
+Plug 'wadackel/vim-dogrun'
+Plug 'itchyny/lightline.vim'
 " Conjure for Clojure
 Plug 'Olical/conjure', {'tag': 'v4.10.0'}
 Plug 'clojure-vim/vim-jack-in'
@@ -50,9 +51,11 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <leader>rn <Plug>(coc-rename)
 
 " Theme
-colorscheme zenburn
-let g:airline_theme='zenburn'
 set termguicolors
+colorscheme dogrun
+let g:lightline = {
+  \ 'colorscheme': 'dogrun',
+  \ }
 
 " Tagbar
 map <C-b> :TagbarToggle<CR>
