@@ -13,7 +13,6 @@ Plug 'radenling/vim-dispatch-neovim'
 " COC, Ale, and Nerdtree
 Plug 'preservim/nerdtree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'dense-analysis/ale'
 call plug#end()
 
 " fzf
