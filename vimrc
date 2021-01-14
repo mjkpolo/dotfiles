@@ -11,9 +11,10 @@ Plug 'Olical/conjure', {'tag': 'v4.10.0'}
 Plug 'clojure-vim/vim-jack-in'
 Plug 'tpope/vim-dispatch'
 Plug 'radenling/vim-dispatch-neovim'
-" COC, Ale, and Nerdtree
+" COC and Nerdtree
 Plug 'preservim/nerdtree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 call plug#end()
 
 " fzf
@@ -42,11 +43,7 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 " Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
+inoremap <silent><expr> <c-space> coc#refresh()
 nmap <silent> gd <Plug>(coc-definition)
 nmap <leader>rn <Plug>(coc-rename)
 
@@ -63,9 +60,9 @@ map <C-b> :TagbarToggle<CR>
 " borrowed geohot config
 syntax on
 set expandtab
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
 set ai
 set number
 set hlsearch
