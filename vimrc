@@ -1,8 +1,12 @@
 call plug#begin('~/.vim/plugged')
+" Essentials
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
-Plug 'jnurmine/Zenburn'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+Plug 'junegunn/gv.vim'
 " Theme
 Plug 'wadackel/vim-dogrun'
 Plug 'itchyny/lightline.vim'
@@ -14,7 +18,6 @@ Plug 'radenling/vim-dispatch-neovim'
 " COC and Nerdtree
 Plug 'preservim/nerdtree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
 call plug#end()
 
 " fzf
