@@ -8,7 +8,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'junegunn/gv.vim'
 " Theme
-Plug 'wadackel/vim-dogrun'
+Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'
 " Conjure for Clojure
 Plug 'Olical/conjure', {'tag': 'v4.10.0'}
@@ -52,9 +52,9 @@ nmap <leader>rn <Plug>(coc-rename)
 
 " Theme
 set termguicolors
-colorscheme dogrun
+colorscheme gruvbox
 let g:lightline = {
-  \ 'colorscheme': 'dogrun',
+  \ 'colorscheme': 'gruvbox',
   \ }
 
 " Tagbar
