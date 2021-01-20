@@ -51,7 +51,6 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <leader>rn <Plug>(coc-rename)
 
 " Theme
-set termguicolors
 colorscheme gruvbox
 let g:lightline = {
   \ 'colorscheme': 'gruvbox',
