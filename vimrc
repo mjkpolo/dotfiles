@@ -52,6 +52,8 @@ nmap <leader>rn <Plug>(coc-rename)
 
 " Theme
 colorscheme gruvbox
+set background=dark
+let g:gruvbox_contrast_dark='hard'
 let g:lightline = {
   \ 'colorscheme': 'gruvbox',
   \ }
