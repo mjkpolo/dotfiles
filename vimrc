@@ -73,6 +73,7 @@ set hlsearch
 set ruler
 
 " Personal Config
+tnoremap <Esc> <C-\><C-n>
 set pastetoggle=<F3>
 set mouse=a
 
