@@ -22,7 +22,7 @@ map ; :Files<CR>
 nnoremap <C-n> :NERDTreeToggle<CR>
 
 " COC.nvim
-let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-java']
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-java', 'coc-clangd', 'coc-cmake', 'coc-pyright']
 set hidden
 set nobackup
 set nowritebackup
