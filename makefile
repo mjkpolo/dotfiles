@@ -14,38 +14,32 @@ clangd: link
 
 .PHONY: cargo
 cargo:
-	sh <(curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs) -y # first install rust
+	sh <(curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs) -y
 
 .PHONY: helix
 helix: cargo link
 	git clone https://github.com/helix-editor/helix
 	cd helix
 	cargo install --path helix-term --locked
-	ln -Ts $$PWD/runtime ~/.config/helix/runtime
+	ln -Ts $$PWD/runtime ../dothelix/runtime
 
 .PHONY: link
 link:
 	[[ -d $$HOME/.local/bin ]] || mkdir -p $$HOME/.local/bin
 	[[ -d $$HOME/.config ]] || mkdir -p $$HOME/.config
-
 	[[ $(UNAME) == Darwin ]] && BASHLOC=bash_profile || BASHLOC=bashrc
-	[[ -e $$HOME/.$$BASHLOC ]] && (unlink $$HOME/.$$BASHLOC || rm -rf $$HOME/.$$BASHLOC)
-	ln -sf $$PWD/bashrc $$HOME/.$$BASHLOC
-
-	[[ -e $$HOME/.config/helix ]] && (unlink $$HOME/.config/helix || rm -rf $$HOME/.config/helix)
-	ln -sf $$PWD/dothelix $$HOME/.config/helix
-
-	[[ -e $$HOME/.tmux.conf ]] && (unlink $$HOME/.tmux.conf || rm -rf $$HOME/.tmux.conf)
-	ln -sf $$PWD/tmux.conf $$HOME/.tmux.conf
-
-	[[ -e $$HOME/.config/kitty ]] && (unlink $$HOME/.config/kitty || rm -rf $$HOME/.config/kitty)
-	ln -sf $$PWD/dotkitty $$HOME/.config/kitty
-
-	[[ -e $$HOME/config.github ]] && (unlink $$HOME/config.github || rm -rf $$HOME/config.github)
-	ln -sf $$PWD/config.github $$HOME/config.github
-
-	[[ -e $$HOME/config.gitlab ]] && (unlink $$HOME/config.gitlab || rm -rf $$HOME/config.gitlab)
-	ln -sf $$PWD/config.gitlab $$HOME/config.gitlab
-
-	[[ -e $$HOME/.gitconfig ]] && (unlink $$HOME/.gitconfig || rm -rf $$HOME/.gitconfig)
-	ln -sf $$PWD/gitconfig $$HOME/.gitconfig
+	unlink_or_remove() {
+		INSTALL_LOC=$$1
+		LOCAL_LOC=$$2
+		[[ -z $$INSTALL_LOC ]] && { echo "Missing name" 2>&1 && exit 1; }
+		[[ -z $$LOCAL_LOC ]] && LOCAL_LOC=$$INSTALL_LOC
+		[[ -e $$HOME/$$INSTALL_LOC ]] && { unlink $$HOME/$$INSTALL_LOC || rm -rf $$HOME/$$INSTALL_LOC; }
+		ln -sf $$PWD/$$LOCAL_LOC $$HOME/$$INSTALL_LOC
+	}
+	unlink_or_remove .$$BASHLOC bashrc
+	unlink_or_remove .config/helix dothelix
+	unlink_or_remove .tmux.conf tmux.conf
+	unlink_or_remove .config/kitty dotkitty
+	unlink_or_remove config.github
+	unlink_or_remove config.gitlab
+	unlink_or_remove .gitconfig gitconfig

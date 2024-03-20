@@ -3,6 +3,7 @@ theme = "github_dark_high_contrast"
 [editor]
 line-number = "relative"
 color-modes = true
+true-color = true
 
 [editor.cursor-shape]
 insert = "bar"
