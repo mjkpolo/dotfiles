@@ -20,8 +20,9 @@ cargo:
 helix: cargo link
 	git clone https://github.com/helix-editor/helix
 	cd helix
+	. "$$HOME/.cargo/env"
 	cargo install --path helix-term --locked
-	ln -Ts $$PWD/runtime ../dothelix/runtime
+	ln -sf $$PWD/runtime ../dothelix/runtime
 
 .PHONY: link
 link:
