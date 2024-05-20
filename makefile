@@ -3,7 +3,7 @@ SHELL := /bin/bash
 UNAME := $(shell uname -s)
 
 .PHONY: all
-all: helix clangd
+all: helix clangd tmux
 
 .PHONY: clangd
 clangd: link
@@ -15,6 +15,13 @@ clangd: link
 .PHONY: cargo
 cargo:
 	sh <(curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs) -y
+
+.PHONY: tmux
+tmux: link
+	git clone https://github.com/tmux/tmux.git
+	cd tmux
+	sh autogen.sh
+	./configure --prefix=$$HOME/.local && make install -j
 
 .PHONY: helix
 helix: cargo link
