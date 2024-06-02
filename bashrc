@@ -28,3 +28,5 @@ export PATH=$HOME/.local/bin:$PATH
 [[ $(uname -s) == "Darwin" ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
 . "$HOME/.cargo/env"
 export EDITOR=hx
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

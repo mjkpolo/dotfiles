@@ -3,7 +3,7 @@ SHELL := /bin/bash
 UNAME := $(shell uname -s)
 
 .PHONY: all
-all: helix cargo-pkgs clangd
+all: helix cargo-pkgs clangd fzf
 
 .PHONY: clangd
 clangd: link
@@ -29,6 +29,12 @@ helix: cargo link
 	. "$$HOME/.cargo/env"
 	cargo install --path helix-term --locked
 	ln -sf $$PWD/runtime ../dothelix/runtime
+
+.PHONY: fzf
+fzf: link
+	git clone --depth 1 https://github.com/junegunn/fzf.git
+	cd fzf
+	./install --all --no-zsh --no-fish
 
 .PHONY: link
 link:
