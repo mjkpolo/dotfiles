@@ -27,3 +27,4 @@ export PS1='\[\e[1;35m\]\u@\h\[\e[0m\]:\[\e[1;36m\]\w\[\e[0m\]\$ '
 export PATH=$HOME/.local/bin:$PATH
 [[ $(uname -s) == "Darwin" ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
 . "$HOME/.cargo/env"
+export EDITOR=hx
