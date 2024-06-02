@@ -3,7 +3,7 @@ SHELL := /bin/bash
 UNAME := $(shell uname -s)
 
 .PHONY: all
-all: helix clangd zellij
+all: helix cargo-pkgs clangd
 
 .PHONY: clangd
 clangd: link
@@ -16,19 +16,15 @@ clangd: link
 cargo:
 	sh <(curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs) -y
 
-.PHONY: zellij
-zellij: cargo link
-	git clone git@github.com:zellij-org/zellij.git
-	cd zellij
-	git pull
-	. "$$HOME/.cargo/env"
-	cargo install --locked zellij
-	
+.PHONY: cargo-pkgs
+cargo-pkgs: cargo
+	cargo install fd-find ripgrep zellij
 
 .PHONY: helix
 helix: cargo link
 	git clone https://github.com/helix-editor/helix
 	cd helix
+	git checkout 24.03
 	git pull
 	. "$$HOME/.cargo/env"
 	cargo install --path helix-term --locked
