@@ -3,7 +3,7 @@ SHELL := /bin/bash
 UNAME := $(shell uname -s)
 
 .PHONY: all
-all: helix cargo-pkgs clangd fzf
+all: helix cargo-pkgs clangd fzf alacritty-theme
 
 .PHONY: clangd
 clangd: link
@@ -36,6 +36,11 @@ fzf: link
 	cd fzf
 	./install --all --no-zsh --no-fish
 
+.PHONY: alacritty-theme
+alacritty-theme: link
+	git clone --depth 1 git@github.com:catppuccin/alacritty.git
+	ln -sf $$PWD/alacritty/catppuccin-mocha.toml $$PWD/dotalacritty/
+
 .PHONY: link
 link:
 	[[ -d $$HOME/.local/bin ]] || mkdir -p $$HOME/.local/bin
@@ -51,7 +56,7 @@ link:
 	unlink_or_remove .bashrc bashrc
 	unlink_or_remove .config/helix dothelix
 	unlink_or_remove .config/zellij dotzellij
-	unlink_or_remove .config/kitty dotkitty
+	unlink_or_remove .config/alacritty dotalacritty
 	unlink_or_remove config.github
 	unlink_or_remove config.gitlab
 	unlink_or_remove .gitconfig gitconfig
