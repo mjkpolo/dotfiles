@@ -6,5 +6,8 @@ import = [
 normal = { family = "SF Mono", style="Regular" }
 size = 17
 
+[window]
+option_as_alt = "Both"
+
 # [env]
 # TERM = "xterm-256color"
