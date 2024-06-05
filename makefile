@@ -22,22 +22,18 @@ cargo-pkgs: cargo
 
 .PHONY: helix
 helix: cargo link
-	git clone https://github.com/helix-editor/helix
 	cd helix
-	git checkout 24.03
-	git pull
 	. "$$HOME/.cargo/env"
 	cargo install --path helix-term --locked
 	ln -sf $$PWD/runtime ../dothelix/runtime
 
 .PHONY: fzf
 fzf: link
-	git clone --depth 1 https://github.com/junegunn/fzf.git
 	cd fzf
 	./install --all --no-zsh --no-fish
 
 .PHONY: link
-link:
+link: setup
 	[[ -d $$HOME/.local/bin ]] || mkdir -p $$HOME/.local/bin
 	[[ -d $$HOME/.config ]] || mkdir -p $$HOME/.config
 	unlink_or_remove() {
@@ -55,3 +51,7 @@ link:
 	unlink_or_remove config.github
 	unlink_or_remove config.gitlab
 	unlink_or_remove .gitconfig gitconfig
+
+.PHONY: setup
+setup:
+	git submodule update --init --recursive
