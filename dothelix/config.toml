@@ -4,6 +4,9 @@ theme = "amberwood"
 line-number = "relative"
 color-modes = true
 true-color = true
+bufferline = "always"
+# bufferline = "multiple"
+# bufferline = "never"
 
 [editor.cursor-shape]
 insert = "bar"
