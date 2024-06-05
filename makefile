@@ -3,7 +3,7 @@ SHELL := /bin/bash
 UNAME := $(shell uname -s)
 
 .PHONY: all
-all: helix cargo-pkgs clangd fzf alacritty-theme
+all: helix cargo-pkgs clangd fzf
 
 .PHONY: clangd
 clangd: link
@@ -35,11 +35,6 @@ fzf: link
 	git clone --depth 1 https://github.com/junegunn/fzf.git
 	cd fzf
 	./install --all --no-zsh --no-fish
-
-.PHONY: alacritty-theme
-alacritty-theme: link
-	git clone --depth 1 git@github.com:catppuccin/alacritty.git
-	ln -sf $$PWD/alacritty/catppuccin-mocha.toml $$PWD/dotalacritty/
 
 .PHONY: link
 link:
