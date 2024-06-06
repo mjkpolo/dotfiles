@@ -20,7 +20,7 @@ cargo:
 cargo-pkgs: cargo
 	cargo install fd-find ripgrep zellij
 
-.PHONY: helix
+.PHONY: helix setup
 helix: cargo link
 	cd helix
 	. "$$HOME/.cargo/env"
