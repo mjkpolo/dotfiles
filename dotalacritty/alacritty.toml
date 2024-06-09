@@ -1,7 +1,6 @@
 import = [
-  "~/.config/alacritty/ayu_dark.toml"
+  "~/.config/alacritty/theme.toml"
 ]
-
 [font]
 normal = { family = "SF Mono", style="Regular" }
 size = 17
