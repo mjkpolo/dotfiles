@@ -23,10 +23,11 @@ HISTFILESIZE=2000
 alias ls="ls --color=auto"
 export GPG_TTY=$(tty)
 
-export PS1='\[\e[1;35m\]\u@\h\[\e[0m\]:\[\e[1;36m\]\w\[\e[0m\]\$ '
+export PS1='\[\e[1;35m\]\u@\h\[\e[0m\]:\[\e[1;36m\]\w\[\e[0m\]\n\$ '
 export PATH=$HOME/.local/bin:$PATH
 [[ $(uname -s) == "Darwin" ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
 . "$HOME/.cargo/env"
 export EDITOR=hx
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
