@@ -30,4 +30,3 @@ export PATH=$HOME/.local/bin:$PATH
 export EDITOR=hx
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
