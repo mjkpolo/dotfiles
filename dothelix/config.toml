@@ -4,7 +4,7 @@ theme = "catppuccin_mocha"
 line-number = "relative"
 color-modes = true
 true-color = true
-bufferline = "multiple"
+bufferline = "always"
 cursorline = true
 
 [editor.cursor-shape]
