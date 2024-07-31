@@ -8,8 +8,8 @@ all: helix cargo-pkgs clangd fzf
 .PHONY: clangd
 clangd: link
 	[[ $(UNAME) == Darwin ]] && FILE=clangd-mac || FILE=clangd-linux
-	curl -LO https://github.com/clangd/clangd/releases/download/17.0.3/$$FILE-17.0.3.zip
-	unzip $$FILE-17.0.3.zip && mv clangd_17.0.3/bin/* $$HOME/.local/bin/ && mv clangd_17.0.3/lib/* $$HOME/.local/lib
+	curl -LO https://github.com/clangd/clangd/releases/download/18.1.3/$$FILE-18.1.3.zip
+	unzip $$FILE-18.1.3.zip && cp -R clangd_18.1.3/bin/* $$HOME/.local/bin/ && cp -R clangd_18.1.3/lib/* $$HOME/.local/lib/
 	rm -rf clangd*
 
 .PHONY: cargo
