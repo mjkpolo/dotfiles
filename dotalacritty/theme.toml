@@ -1,75 +1,74 @@
-[colors.primary]
-background = '#1E1E2E' # base
-foreground = '#CDD6F4' # text
-# Bright and dim foreground colors
-dim_foreground = '#CDD6F4' # text
-bright_foreground = '#CDD6F4' # text
+# Colors section of "Alacritty - TOML configuration file format"
+# https://github.com/alacritty/alacritty/blob/master/extra/man/alacritty.5.scd#colors
 
-# Cursor colors
+[colors.primary]
+foreground = "#e0def4"
+background = "#232136"
+dim_foreground = "#908caa"
+bright_foreground = "#e0def4"
+
 [colors.cursor]
-text = '#1E1E2E' # base
-cursor = '#F5E0DC' # rosewater
+text = "#e0def4"
+cursor = "#56526e"
 
 [colors.vi_mode_cursor]
-text = '#1E1E2E' # base
-cursor = '#B4BEFE' # lavender
+text = "#e0def4"
+cursor = "#56526e"
 
-# Search colors
 [colors.search.matches]
-foreground = '#1E1E2E' # base
-background = '#A6ADC8' # subtext0
+foreground = "#908caa"
+background = "#393552"
 
 [colors.search.focused_match]
-foreground = '#1E1E2E' # base
-background = '#A6E3A1' # green
+foreground = "#232136"
+background = "#ea9a97"
 
-[colors.footer_bar]
-foreground = '#1E1E2E' # base
-background = '#A6ADC8' # subtext0
-
-# Keyboard regex hints
 [colors.hints.start]
-foreground = '#1E1E2E' # base
-background = '#F9E2AF' # yellow
+foreground = "#908caa"
+background = "#2a273f"
 
 [colors.hints.end]
-foreground = '#1E1E2E' # base
-background = '#A6ADC8' # subtext0
+foreground = "#6e6a86"
+background = "#2a273f"
 
-# Selection colors
+[colors.line_indicator]
+foreground = "None"
+background = "None"
+
+[colors.footer_bar]
+foreground = "#e0def4"
+background = "#2a273f"
+
 [colors.selection]
-text = '#1E1E2E' # base
-background = '#F5E0DC' # rosewater
+text = "#e0def4"
+background = "#44415a"
 
-# Normal colors
 [colors.normal]
-black = '#45475A' # surface1
-red = '#F38BA8' # red
-green = '#A6E3A1' # green
-yellow = '#F9E2AF' # yellow
-blue = '#89B4FA' # blue
-magenta = '#F5C2E7' # pink
-cyan = '#94E2D5' # teal
-white = '#BAC2DE' # subtext1
+black = "#393552"
+red = "#eb6f92"
+green = "#3e8fb0"
+yellow = "#f6c177"
+blue = "#9ccfd8"
+magenta = "#c4a7e7"
+cyan = "#ea9a97"
+white = "#e0def4"
 
-# Bright colors
 [colors.bright]
-black = '#585B70' # surface2
-red = '#F38BA8' # red
-green = '#A6E3A1' # green
-yellow = '#F9E2AF' # yellow
-blue = '#89B4FA' # blue
-magenta = '#F5C2E7' # pink
-cyan = '#94E2D5' # teal
-white = '#A6ADC8' # subtext0
+black = "#6e6a86"
+red = "#eb6f92"
+green = "#3e8fb0"
+yellow = "#f6c177"
+blue = "#9ccfd8"
+magenta = "#c4a7e7"
+cyan = "#ea9a97"
+white = "#e0def4"
 
-# Dim colors
 [colors.dim]
-black = '#45475A' # surface1
-red = '#F38BA8' # red
-green = '#A6E3A1' # green
-yellow = '#F9E2AF' # yellow
-blue = '#89B4FA' # blue
-magenta = '#F5C2E7' # pink
-cyan = '#94E2D5' # teal
-white = '#BAC2DE' # subtext1
+black = "#6e6a86"
+red = "#eb6f92"
+green = "#3e8fb0"
+yellow = "#f6c177"
+blue = "#9ccfd8"
+magenta = "#c4a7e7"
+cyan = "#ea9a97"
+white = "#e0def4"
