@@ -18,12 +18,13 @@ cargo:
 
 .PHONY: cargo-pkgs
 cargo-pkgs: cargo
+	. "$$HOME/.cargo/env"
 	cargo install fd-find ripgrep zellij
 
 .PHONY: helix
 helix: cargo link
-	cd helix
 	. "$$HOME/.cargo/env"
+	cd helix
 	cargo install --path helix-term --locked
 	ln -sf $$PWD/runtime ../dothelix/runtime
 
