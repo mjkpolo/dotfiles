@@ -36,19 +36,3 @@ export FZF_DEFAULT_OPTS="
 	--color=spinner:#f6c177,info:#9ccfd8
 	--color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa"
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-__conda_setup="$('/home/mkurzynski/miniforge3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/mkurzynski/miniforge3/etc/profile.d/conda.sh" ]; then
-        . "/home/mkurzynski/miniforge3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/mkurzynski/miniforge3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-
-if [ -f "/home/mkurzynski/miniforge3/etc/profile.d/mamba.sh" ]; then
-    . "/home/mkurzynski/miniforge3/etc/profile.d/mamba.sh"
-fi
-# <<< conda initialize <<<

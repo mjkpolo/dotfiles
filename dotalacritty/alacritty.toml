@@ -2,7 +2,7 @@ import = [
   "~/.config/alacritty/theme.toml"
 ]
 [font]
-normal = { family = "Hack Nerd Font Mono" }
+normal = { family = "SF Mono" }
 size = 17
 
 [window]
