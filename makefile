@@ -3,13 +3,14 @@ SHELL := /bin/bash
 UNAME := $(shell uname -s)
 
 .PHONY: all
-all: helix cargo-pkgs clangd fzf
+all: neovim cargo-pkgs clangd fzf
 
 .PHONY: clangd
 clangd: link
 	[[ $(UNAME) == Darwin ]] && FILE=clangd-mac || FILE=clangd-linux
-	curl -LO https://github.com/clangd/clangd/releases/download/18.1.3/$$FILE-18.1.3.zip
-	unzip $$FILE-18.1.3.zip && cp -R clangd_18.1.3/bin/* $$HOME/.local/bin/ && cp -R clangd_18.1.3/lib/* $$HOME/.local/lib/
+	VERSION=19.1.0
+	curl -LO https://github.com/clangd/clangd/releases/download/$$VERSION/$$FILE-$$VERSION.zip
+	unzip $$FILE-$$VERSION.zip && cp -R clangd_$$VERSION/bin/* $$HOME/.local/bin/ && cp -R clangd_$$VERSION/lib/* $$HOME/.local/lib/
 	rm -rf clangd*
 
 .PHONY: cargo
@@ -21,12 +22,21 @@ cargo-pkgs: cargo
 	. "$$HOME/.cargo/env"
 	cargo install fd-find ripgrep zellij
 
-.PHONY: helix
-helix: cargo link
-	. "$$HOME/.cargo/env"
-	cd helix
-	cargo install --path helix-term --locked
-	ln -sf $$PWD/runtime ../dothelix/runtime
+.PHONY: neovim
+neovim: link
+	VERSION=v0.10.2
+	if [[ $(UNAME) == Darwin ]]
+	then
+		FILE=nvim-macos-arm64
+		curl -LO https://github.com/neovim/neovim/releases/download/$$VERSION/$$FILE.tar.gz
+		xattr -c ./$$FILE.tar.gz
+	else
+		FILE=nvim-linux64
+		curl -LO https://github.com/neovim/neovim/releases/download/$$VERSION/$$FILE.tar.gz
+	fi
+	tar -xzf $$FILE.tar.gz --strip-components=1 -C $$HOME/.local
+	rm $$FILE.tar.gz
+	rm -rf $$FILE
 
 .PHONY: fzf
 fzf: link
@@ -49,6 +59,7 @@ link: setup
 	unlink_or_remove .config/helix dothelix
 	unlink_or_remove .config/zellij dotzellij
 	unlink_or_remove .config/alacritty dotalacritty
+	unlink_or_remove .config/nvim kickstart.nvim
 	unlink_or_remove config.github
 	unlink_or_remove config.gitlab
 	unlink_or_remove .gitconfig gitconfig
