@@ -3,15 +3,7 @@ SHELL := /bin/bash
 UNAME := $(shell uname -s)
 
 .PHONY: all
-all: neovim cargo-pkgs clangd fzf
-
-.PHONY: clangd
-clangd: link
-	[[ $(UNAME) == Darwin ]] && FILE=clangd-mac || FILE=clangd-linux
-	VERSION=19.1.0
-	curl -LO https://github.com/clangd/clangd/releases/download/$$VERSION/$$FILE-$$VERSION.zip
-	unzip $$FILE-$$VERSION.zip && cp -R clangd_$$VERSION/bin/* $$HOME/.local/bin/ && cp -R clangd_$$VERSION/lib/* $$HOME/.local/lib/
-	rm -rf clangd*
+all: neovim cargo-pkgs fzf
 
 .PHONY: cargo
 cargo:
