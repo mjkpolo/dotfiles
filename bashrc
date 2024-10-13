@@ -21,13 +21,14 @@ HISTFILESIZE=2000
 # User specific environment
 
 alias ls="ls --color=auto"
+alias vi="nvim"
 export GPG_TTY=$(tty)
 
 export PS1='\[\e[1;35m\]\u@\h\[\e[0m\]:\[\e[1;34m\]\w\[\e[0m\]\n\$ '
 export PATH=$HOME/.local/bin:$PATH
 [[ $(uname -s) == "Darwin" ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
 . "$HOME/.cargo/env"
-export EDITOR=hx
+export EDITOR="nvim"
 
 export FZF_DEFAULT_OPTS="
 	--color=fg:#908caa,bg:#232136,hl:#ea9a97
