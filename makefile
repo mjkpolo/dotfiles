@@ -7,9 +7,10 @@ all: helix cargo-pkgs clangd fzf
 
 .PHONY: clangd
 clangd: link
+	VERSION=19.1.0
 	[[ $(UNAME) == Darwin ]] && FILE=clangd-mac || FILE=clangd-linux
-	curl -LO https://github.com/clangd/clangd/releases/download/18.1.3/$$FILE-18.1.3.zip
-	unzip $$FILE-18.1.3.zip && cp -R clangd_18.1.3/bin/* $$HOME/.local/bin/ && cp -R clangd_18.1.3/lib/* $$HOME/.local/lib/
+	curl -LO https://github.com/clangd/clangd/releases/download/$$VERSION/$$FILE-$$VERSION.zip
+	unzip $$FILE-$$VERSION.zip && cp -R clangd_$$VERSION/bin/* $$HOME/.local/bin/ && cp -R clangd_$$VERSION/lib/* $$HOME/.local/lib/
 	rm -rf clangd*
 
 .PHONY: cargo
