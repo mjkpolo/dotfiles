@@ -1,6 +1,7 @@
+[submodule "helix"]
+	path = helix
+	url = git@github.com:helix-editor/helix.git
+	ignore = dirty
 [submodule "fzf"]
 	path = fzf
 	url = git@github.com:junegunn/fzf.git
-[submodule "dotneovim/kickstart.nvim"]
-	path = kickstart.nvim
-	url = git@github.com:mjkpolo/kickstart.nvim.git
