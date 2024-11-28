@@ -18,5 +18,8 @@ render = true
 [editor.lsp]
 display-messages = true
 
+[editor.file-picker]
+# max-heap-usage = 5
+
 [keys.normal]
 D = ["ensure_selections_forward", "extend_to_line_end", "delete_selection"]
