@@ -29,6 +29,29 @@ helix: cargo link
 	cargo install --path helix-term --locked
 	ln -sf $$PWD/runtime ../dothelix/runtime
 
+.PHONY: wezterm
+wezterm: link
+	VERSION=20240203-110809-5046fc22
+	if [[ $(UNAME) == Darwin ]]
+	then
+		FILE=WezTerm-macos-$$VERSION
+		EXT=zip
+	else
+		FILE=wezterm-$$VERSION.Ubuntu20.04
+		EXT=tar.xz
+	fi
+	wget https://github.com/wez/wezterm/releases/download/$$VERSION/$$FILE.$$EXT
+	[[ $$EXT == zip ]] && unzip $$FILE.$$EXT || tar xf $$FILE.$$EXT
+	rm $$FILE.$$EXT
+	if [[ $(UNAME) == Darwin ]]
+	then
+		mv $$FILE/Wezterm.app $$HOME/Applications/
+		rmdir $$FILE
+	else
+		ln -sf $$PWD/wezterm/usr/bin/* $$HOME/.local/bin/
+		echo ". $$PWD/wezterm/etc/profile.d/wezterm.sh" >> $$HOME/.profile
+	fi
+
 .PHONY: fzf
 fzf: link
 	cd fzf
@@ -49,7 +72,7 @@ link: setup
 	unlink_or_remove .bashrc bashrc
 	unlink_or_remove .config/helix dothelix
 	unlink_or_remove .config/zellij dotzellij
-	unlink_or_remove .config/alacritty dotalacritty
+	unlink_or_remove .config/wezterm dotwezterm
 	unlink_or_remove config.github
 	unlink_or_remove config.gitlab
 	unlink_or_remove .gitconfig gitconfig

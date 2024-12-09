@@ -1,9 +1,0 @@
-import = [
-  "~/.config/alacritty/theme.toml"
-]
-[font]
-normal = { family = "SF Mono" }
-size = 17
-
-[window]
-option_as_alt = "Both"
