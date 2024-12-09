@@ -37,19 +37,18 @@ wezterm: link
 		FILE=WezTerm-macos-$$VERSION
 		EXT=zip
 	else
-		FILE=wezterm-$$VERSION.Ubuntu20.04
-		EXT=tar.xz
+		FILE=WezTerm-$$VERSION-Ubuntu20.04
+		EXT=AppImage
 	fi
-	wget https://github.com/wez/wezterm/releases/download/$$VERSION/$$FILE.$$EXT
-	[[ $$EXT == zip ]] && unzip $$FILE.$$EXT || tar xf $$FILE.$$EXT
-	rm $$FILE.$$EXT
+
+	curl -LO https://github.com/wez/wezterm/releases/download/$$VERSION/$$FILE.$$EXT
+	[[ $$EXT == zip ]] && unzip $$FILE.$$EXT || chmod +x $$FILE.$$EXT
 	if [[ $(UNAME) == Darwin ]]
 	then
 		mv $$FILE/Wezterm.app $$HOME/Applications/
 		rmdir $$FILE
 	else
-		ln -sf $$PWD/wezterm/usr/bin/* $$HOME/.local/bin/
-		echo ". $$PWD/wezterm/etc/profile.d/wezterm.sh" >> $$HOME/.profile
+		mv $$PWD/$$FILE.$$EXT $$HOME/.local/bin/wezterm
 	fi
 
 .PHONY: fzf
