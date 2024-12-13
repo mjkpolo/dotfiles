@@ -1,0 +1,13 @@
+[[language]]
+name = "latex"
+
+[language-server.texlab.config.texlab.build]
+onSave = true
+forwardSearchAfter = true
+
+[language-server.texlab.config.texlab.forwardSearch]
+executable = "/Applications/Skim.app/Contents/SharedSupport/displayline"
+args = ["-g", "-r", "%l", "%p", "%f"] 
+
+[language-server.texlab.config.texlab.chktex]
+onEdit = true

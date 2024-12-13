@@ -20,7 +20,10 @@ cargo:
 .PHONY: cargo-pkgs
 cargo-pkgs: cargo
 	. "$$HOME/.cargo/env"
-	cargo install fd-find ripgrep zellij
+	cargo install fd-find --locked
+	cargo install ripgrep --locked
+	cargo install zellij --locked
+	cargo install --git https://github.com/latex-lsp/texlab --locked --tag v5.21.0
 
 .PHONY: helix
 helix: cargo link
