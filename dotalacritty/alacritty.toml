@@ -1,9 +1,12 @@
 [font]
-normal = { family = "SF Mono",  style = "Medium"}
-size = 17
+normal = { family = "Hack Nerd Font Mono",  style = "Regular"}
+size = 13
+# normal = { family = "SF Mono",  style = "Medium"}
+# size = 17
 
 [window]
 option_as_alt = "Both"
+opacity = 0.88
 
 [general]
 import = [
