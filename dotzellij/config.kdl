@@ -291,8 +291,8 @@ session_serialization false
 //
 themes {
 	gruber-darker {
-        bg "#181818"
-        fg "#E4E4E4"
+        bg "#484848"
+        fg "#B4B4B4"
         red "#F43841"
         green "#73D936"
         blue "#96A6C8"
