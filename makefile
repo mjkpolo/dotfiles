@@ -3,7 +3,17 @@ SHELL := /bin/bash
 UNAME := $(shell uname -s)
 
 .PHONY: all
-all: helix cargo-pkgs clangd fzf
+all: helix cargo-pkgs clangd fzf ltex-ls-plus
+
+.PHONY: ltex-ls-plus
+ltex-ls-plus: link
+	VERSION=18.4.0
+	[[ $(UNAME) == Darwin ]] && FILE=mac-aarch64 || FILE=linux-x64
+	curl -LO https://github.com/ltex-plus/ltex-ls-plus/releases/download/$$VERSION/ltex-ls-plus-$$VERSION-$$FILE.tar.gz
+	tar xf ltex-ls-plus-$$VERSION-$$FILE.tar.gz
+	rm ltex-ls-plus-$$VERSION-$$FILE.tar.gz
+	cd ltex-ls-plus-$$VERSION
+	ln -sf $$PWD/bin/ltex-ls-plus $$HOME/.local/bin/ltex-ls-plus
 
 .PHONY: clangd
 clangd: link
