@@ -32,7 +32,6 @@ cargo-pkgs: cargo
 	. "$$HOME/.cargo/env"
 	cargo install fd-find --locked
 	cargo install ripgrep --locked
-	cargo install zellij --locked
 	cargo install --git https://github.com/latex-lsp/texlab --locked --tag v5.21.0
 
 .PHONY: helix
@@ -61,7 +60,7 @@ link: setup
 	}
 	unlink_or_remove .bashrc bashrc
 	unlink_or_remove .config/helix dothelix
-	unlink_or_remove .config/zellij dotzellij
+	unlink_or_remove .tmux.conf tmux.conf
 	unlink_or_remove .config/alacritty dotalacritty
 	unlink_or_remove config.github
 	unlink_or_remove config.gitlab
