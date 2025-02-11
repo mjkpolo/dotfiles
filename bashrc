@@ -26,7 +26,19 @@ export GPG_TTY=$(tty)
 export PS1='\[\e[1;35m\]\u@\h\[\e[0m\]:\[\e[1;34m\]\w\[\e[0m\]\n\$ '
 export PATH=$HOME/.local/bin:$PATH
 [[ $(uname -s) == "Darwin" ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
-. "$HOME/.cargo/env"
 export EDITOR=hx
 
+_scancel_fzf_completion() {
+  local selected_job
+  selected_job=$(squeue --me | tail -n +2 | fzf --prompt="Select a job to cancel: " | awk '{print $1}')
+  if [[ -n "$selected_job" ]]; then
+    COMPREPLY=("$selected_job")
+  else
+    COMPREPLY=()
+  fi
+}
+
+complete -F _scancel_fzf_completion scancel
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+alias ta="tmux attach -t $(hostname -d)"
+alias tc="tmux new -s $(hostname -d)"
