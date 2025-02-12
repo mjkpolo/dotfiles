@@ -40,5 +40,11 @@ _scancel_fzf_completion() {
 
 complete -F _scancel_fzf_completion scancel
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-alias ta="tmux attach -t $(hostname -d)"
-alias tc="tmux new -s $(hostname -d)"
+
+get_sesh_name() {
+  hostname | sed 's/\./_/g'
+}
+
+alias ta="tmux attach -t $(get_sesh_name)"
+alias tc="tmux new -s $(get_sesh_name)"
+alias tk="tmux kill-server"
