@@ -48,4 +48,3 @@ get_sesh_name() {
 alias ta="tmux attach -t $(get_sesh_name)"
 alias tc="tmux new -s $(get_sesh_name)"
 alias tk="tmux kill-server"
-. $MYHOME/.env/bin/activate
