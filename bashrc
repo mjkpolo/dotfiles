@@ -23,7 +23,7 @@ HISTFILESIZE=2000
 alias ls="ls --color=auto"
 export GPG_TTY=$(tty)
 
-export PS1='\[\e[1;35m\]\u@\h\[\e[0m\]:\[\e[1;34m\]\w\[\e[0m\]\n\$ '
+export PS1='\[\e[1;35m\]\w\[\e[0m\]\n\$ '
 export PATH=$HOME/.local/bin:$PATH
 [[ $(uname -s) == "Darwin" ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
 export EDITOR=hx
@@ -48,3 +48,4 @@ get_sesh_name() {
 alias ta="tmux attach -t $(get_sesh_name)"
 alias tc="tmux new -s $(get_sesh_name)"
 alias tk="tmux kill-server"
+. $MYHOME/.env/bin/activate
