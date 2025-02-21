@@ -1,4 +1,13 @@
 # .bashrc
+
+# change home here
+export MYHOME=$HOME
+
+export CARGO_HOME=$MYHOME/.cargo
+export RUSTUP_HOME=$MYHOME/.rustup
+
+# above no prompt return so makefile can source
+
 [ -z "$PS1" ] && return
 
 # don't put duplicate lines in the history. See bash(1) for more options
@@ -25,10 +34,6 @@ export GPG_TTY=$(tty)
 
 export PS1='[\[\e[1;35m\]\w\[\e[0m\]@\[\e[1;34m\]\H\[\e[0m\]]\n\$ '
 
-# change home here:
-export MYHOME=$HOME
-export CARGO_HOME=$MYHOME/.cargo
-export RUSTUP_HOME=$MYHOME/.rustup
 export PATH=$MYHOME/.local/bin:$PATH
 export LD_LIBRARY_PATH=$MYHOME/.local/lib:$LD_LIBRARY_PATH
 export MANPATH=$MYHOME/.local/share/man:$MANPATH
