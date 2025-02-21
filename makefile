@@ -46,6 +46,37 @@ fzf: link
 	cd fzf
 	./install --all --no-zsh --no-fish
 
+.PHONY: ncurses
+ncurses: link
+	curl -LO https://ftp.gnu.org/gnu/ncurses/ncurses-6.5.tar.gz
+	tar xzf ncurses-*.tar.gz
+	rm ncurses-*.tar.gz
+	cd ncurses-*/
+	./configure --prefix=$$HOME/.local --with-shared --with-termlib --enable-pc-files --with-pkg-config-libdir=$$HOME/.local/lib/pkgconfig
+	make -j20 && make install
+	rm -rf ncurses-*/
+
+.PHONY: libevent
+libevent: link
+	curl -LO https://github.com/libevent/libevent/releases/download/release-2.1.12-stable/libevent-2.1.12-stable.tar.gz
+	tar xzf libevent-*.tar.gz
+	rm libevent-*.tar.gz
+	cd libevent-*/
+	./configure --prefix=$$HOME/.local --enable-shared
+	make -j20 && make install
+	rm -rf libevent-*/
+
+.PHONY: tmux
+tmux: libevent ncurses
+	curl -LO https://github.com/tmux/tmux/releases/download/3.5a/tmux-3.5a.tar.gz
+	tar xzf tmux-*.tar.gz
+	rm tmux-*.tar.gz
+	cd tmux-*/
+	PKG_CONFIG_PATH=$$HOME/.local/lib/pkgconfig ./configure --prefix=$$HOME/.local
+	make -j20 && make install
+	cd ..
+	rm -rf tmux-*/
+
 .PHONY: link
 link: setup
 	[[ -d $$HOME/.local/bin ]] || mkdir -p $$HOME/.local/bin
