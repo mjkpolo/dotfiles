@@ -24,9 +24,15 @@ alias ls="ls --color=auto"
 export GPG_TTY=$(tty)
 
 export PS1='[\[\e[1;35m\]\w\[\e[0m\]@\[\e[1;34m\]\H\[\e[0m\]]\n\$ '
-export PATH=$HOME/.local/bin:$PATH
-export LD_LIBRARY_PATH=$HOME/.local/lib:$LD_LIBRARY_PATH
-export MANPATH=$HOME/.local/share/man:$MANPATH
+
+# change home here:
+export MYHOME=$HOME
+export CARGO_HOME=$MYHOME/.cargo
+export RUSTUP_HOME=$MYHOME/.rustup
+export PATH=$MYHOME/.local/bin:$PATH
+export LD_LIBRARY_PATH=$MYHOME/.local/lib:$LD_LIBRARY_PATH
+export MANPATH=$MYHOME/.local/share/man:$MANPATH
+
 [[ $(uname -s) == "Darwin" ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
 export EDITOR=hx
 
@@ -50,4 +56,3 @@ get_sesh_name() {
 alias ta="tmux attach -t $(get_sesh_name)"
 alias tc="tmux new -s $(get_sesh_name)"
 alias tk="tmux kill-server"
-. "$HOME/.cargo/env"
