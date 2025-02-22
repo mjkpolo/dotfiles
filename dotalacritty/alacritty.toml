@@ -1,10 +1,10 @@
 [font]
 normal = { family = "Iosevka Term",  style = "Regular"}
-size = 16
+size = 18
 
 [window]
 option_as_alt = "Both"
-opacity = 0.82
+# opacity = 0.82
 
 [general]
 import = [
