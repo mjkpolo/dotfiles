@@ -58,7 +58,13 @@ get_sesh_name() {
   hostname | sed 's/\./_/g'
 }
 
+ssh_callback() {
+  ssh "$@"
+  alacritty msg config "$(cat $MYHOME/.config/alacritty/theme.toml)"
+}
+
 alias ta="tmux attach -t $(get_sesh_name)"
 alias tc="tmux new -s $(get_sesh_name)"
 alias tk="tmux kill-server"
+alias ssh="ssh_callback"
 . "$MYHOME/.cargo/env"
