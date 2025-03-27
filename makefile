@@ -52,7 +52,7 @@ fzf: link
 	./install --all --no-zsh --no-fish
 
 .PHONY: tmux
-tmux: ncurses libevent
+tmux: ncurses libevent bison
 	VERSION=3.5a
 	source bashrc
 	curl -LO https://github.com/tmux/tmux/releases/download/$$VERSION/tmux-$$VERSION.tar.gz
@@ -63,6 +63,19 @@ tmux: ncurses libevent
 	make -j20 && make install
 	cd ..
 	rm -rf tmux-$$VERSION
+
+.PHONY: bison
+bison: link
+	VERSION=3.8
+	source bashrc
+	curl -LO https://ftp.gnu.org/gnu/bison/bison-$$VERSION.tar.gz
+	tar xzf bison-$$VERSION.tar.gz
+	rm bison-$$VERSION.tar.gz
+	cd bison-$$VERSION
+	./configure --prefix=$$MYHOME/.local
+	make -j20 && make install
+	cd ..
+	rm -rf bison-$$VERSION
 
 .PHONY: ncurses
 ncurses: link
@@ -78,17 +91,30 @@ ncurses: link
 	rm -rf ncurses-$$VERSION
 
 .PHONY: libevent
-libevent: link
+libevent: link openssl
 	VERSION=2.1.12-stable
 	source bashrc
 	curl -LO https://github.com/libevent/libevent/releases/download/release-$$VERSION/libevent-$$VERSION.tar.gz
 	tar xzf libevent-$$VERSION.tar.gz
 	rm libevent-$$VERSION.tar.gz
 	cd libevent-$$VERSION
-	./configure --prefix=$$MYHOME/.local --enable-shared
+	PKG_CONFIG_PATH=$$MYHOME/.local/lib64/pkgconfig ./configure --prefix=$$MYHOME/.local --enable-shared
 	make -j20 && make install
 	cd ..
 	rm -rf libevent-$$VERSION
+
+.PHONY: openssl
+openssl: link
+	VERSION=3.4.1
+	source bashrc
+	curl -LO https://github.com/openssl/openssl/releases/download/openssl-$$VERSION/openssl-$$VERSION.tar.gz
+	tar xzf openssl-$$VERSION.tar.gz
+	rm openssl-$$VERSION.tar.gz
+	cd openssl-$$VERSION
+	./Configure --prefix=$$MYHOME/.local
+	make -j20 && make install
+	cd ..
+	rm -rf openssl-$$VERSION
 
 .PHONY: link
 link: setup
