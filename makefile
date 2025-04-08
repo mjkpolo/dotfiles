@@ -3,11 +3,11 @@ SHELL := /bin/bash
 UNAME := $(shell uname -s)
 
 .PHONY: all
-all: helix cargo-pkgs clangd fzf ltex-ls-plus tmux
+all: helix cargo-pkgs clangd fzf ltex-ls-plus tmux uv-venv
 
 .PHONY: ltex-ls-plus
 ltex-ls-plus: link
-	VERSION=18.4.0
+	VERSION=18.5.0
 	source bashrc
 	[[ $(UNAME) == Darwin ]] && FILE=mac-aarch64 || FILE=linux-x64
 	curl -LO https://github.com/ltex-plus/ltex-ls-plus/releases/download/$$VERSION/ltex-ls-plus-$$VERSION-$$FILE.tar.gz
@@ -28,7 +28,12 @@ clangd: link
 .PHONY: cargo
 cargo:
 	source bashrc
-	sh <(curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs) -y
+	[[ -d $$CARGO_HOME ]] || sh <(curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs) -y
+
+.PHONY: uv-venv
+uv-venv: cargo-pkgs
+	source bashrc
+	[[ -d $$MYHOME/.venv ]] || uv venv $$MYHOME/.venv
 
 .PHONY: cargo-pkgs
 cargo-pkgs: cargo
@@ -37,6 +42,7 @@ cargo-pkgs: cargo
 	cargo install fd-find --locked
 	cargo install ripgrep --locked
 	cargo install --git https://github.com/latex-lsp/texlab --locked --tag v5.21.0
+	cargo install --git https://github.com/astral-sh/uv uv --locked
 
 .PHONY: helix
 helix: cargo link
