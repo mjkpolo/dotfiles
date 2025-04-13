@@ -33,6 +33,7 @@ cargo:
 .PHONY: uv-venv
 uv-venv: cargo-pkgs
 	source bashrc
+	. $$CARGO_HOME/env
 	[[ -d $$MYHOME/.venv ]] || uv venv $$MYHOME/.venv
 
 .PHONY: cargo-pkgs

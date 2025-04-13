@@ -1,6 +1,7 @@
 [font]
 normal = { family = "Iosevka Term",  style = "Regular"}
-size = 22
+# normal = { family = "JetBrainsMono Nerd Font",  style = "Regular"}
+size = 24
 
 [window]
 option_as_alt = "Both"
@@ -8,5 +9,6 @@ option_as_alt = "Both"
 
 [general]
 import = [
-  "~/.config/alacritty/theme.toml"
+  # "~/.config/alacritty/theme.toml"
+  "~/.config/alacritty/jellybeans.toml"
 ]

@@ -69,4 +69,7 @@ alias tk="tmux kill-server"
 alias ssh="ssh_callback"
 alias yacc="bison"
 . "$MYHOME/.cargo/env"
-source "$MYHOME/.venv/bin/activate"
+. "$MYHOME/.venv/bin/activate"
+
+export YT_PROXY=delta.yt.nebius.yt
+export YT_CONFIG_PATCHES="{proxy={force_ipv4=%true}}"
