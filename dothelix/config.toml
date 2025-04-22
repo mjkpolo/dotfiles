@@ -1,4 +1,4 @@
-theme = "beans"
+theme = "catppuccin_mocha"
 
 [editor]
 line-number = "relative"
@@ -21,6 +21,7 @@ display-messages = true
 
 [keys.normal]
 D = ["ensure_selections_forward", "extend_to_line_end", "delete_selection"]
+Y = ["yank_joined"]
 
 [keys.insert]
 "C-[" = "normal_mode"
