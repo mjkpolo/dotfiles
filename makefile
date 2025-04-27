@@ -28,7 +28,7 @@ clangd: link
 .PHONY: cargo
 cargo:
 	source bashrc
-	[[ -d $$CARGO_HOME ]] || sh <(curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs) -y
+	sh <(curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs) --no-modify-path -y
 
 .PHONY: uv-venv
 uv-venv: cargo-pkgs
@@ -44,6 +44,7 @@ cargo-pkgs: cargo
 	cargo install ripgrep --locked
 	cargo install --git https://github.com/latex-lsp/texlab --locked --tag v5.21.0
 	cargo install --git https://github.com/astral-sh/uv uv --locked
+	cargo install --locked --git https://github.com/Feel-ix-343/markdown-oxide.git markdown-oxide
 
 .PHONY: helix
 helix: cargo link

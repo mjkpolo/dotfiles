@@ -1,5 +1,6 @@
 [[language]]
 name = "latex"
+soft-wrap.enable = true
 language-servers = [ "texlab", "ltex-ls-plus" ]
 
 [language-server.texlab.config.texlab.build]
@@ -14,3 +15,8 @@ args = [ "--synctex-forward", "%l:1:%f", "%p" ]
 
 [language-server.texlab.config.texlab.chktex]
 onEdit = true
+
+[[language]]
+name = "markdown"
+soft-wrap.enable = true
+language-servers = ["markdown-oxide", "ltex-ls-plus"]
