@@ -3,11 +3,11 @@ SHELL := /bin/bash
 UNAME := $(shell uname -s)
 
 .PHONY: all
-all: helix cargo-pkgs clangd fzf ltex-ls-plus tmux uv-venv
+all: helix cargo-pkgs clangd fzf ltex-ls-plus uv-venv
 
 .PHONY: ltex-ls-plus
 ltex-ls-plus: link
-	VERSION=18.5.0
+	VERSION=18.5.1
 	source bashrc
 	[[ $(UNAME) == Darwin ]] && FILE=mac-aarch64 || FILE=linux-x64
 	curl -LO https://github.com/ltex-plus/ltex-ls-plus/releases/download/$$VERSION/ltex-ls-plus-$$VERSION-$$FILE.tar.gz
@@ -45,6 +45,7 @@ cargo-pkgs: cargo
 	cargo install --git https://github.com/latex-lsp/texlab --locked --tag v5.21.0
 	cargo install --git https://github.com/astral-sh/uv uv --locked
 	cargo install --locked --git https://github.com/Feel-ix-343/markdown-oxide.git markdown-oxide
+	cargo install --locked --git https://github.com/zellij-org/zellij.git zellij --tag v0.42.2
 
 .PHONY: helix
 helix: cargo link
@@ -59,7 +60,7 @@ fzf: link
 	cd fzf
 	./install --all --no-zsh --no-fish
 
-.PHONY: tmux
+.PHONY: tmux  # Optional, not installed by default
 tmux: ncurses libevent bison
 	VERSION=3.5a
 	source bashrc
@@ -140,6 +141,7 @@ link: setup
 	unlink_or_remove dothelix .config/helix
 	unlink_or_remove tmux.conf .tmux.conf
 	unlink_or_remove dotalacritty .config/alacritty
+	unlink_or_remove dotzellij .config/zellij
 	unlink_or_remove config.github config.github
 	unlink_or_remove config.gitlab config.gitlab
 	unlink_or_remove gitconfig .gitconfig
