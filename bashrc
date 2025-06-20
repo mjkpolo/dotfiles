@@ -37,6 +37,7 @@ export PS1='[\[\e[1;35m\]\w\[\e[0m\]@\[\e[1;34m\]\H\[\e[0m\]]\n\$ '
 export PATH=$MYHOME/.local/bin:$PATH
 export LD_LIBRARY_PATH=$MYHOME/.local/lib:$LD_LIBRARY_PATH
 export MANPATH=$MYHOME/.local/share/man:$MANPATH
+export PKG_CONFIG_PATH=$MYHOME/.local/lib/pkgconfig:$PKG_CONFIG_PATH
 
 [[ $(uname -s) == "Darwin" ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
 export EDITOR=hx
@@ -58,18 +59,13 @@ get_sesh_name() {
   hostname | sed 's/\./_/g'
 }
 
-ssh_callback() {
-  ssh "$@"
-  alacritty msg config "$(cat $MYHOME/.config/alacritty/theme.toml)"
-}
-
 alias ta="tmux attach -t $(get_sesh_name)"
 alias tc="tmux new -s $(get_sesh_name)"
 alias tk="tmux kill-server"
-alias ssh="ssh_callback"
 alias yacc="bison"
 . "$MYHOME/.cargo/env"
 . "$MYHOME/.venv/bin/activate"
 
 export YT_PROXY=delta.yt.nebius.yt
 export YT_CONFIG_PATCHES="{proxy={force_ipv4=%true}}"
+XDG_DATA_DIRS="${XDG_DATA_DIRS}:${MYHOME}/.local/share/flatpak/exports/share"

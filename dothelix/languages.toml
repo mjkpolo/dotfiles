@@ -18,5 +18,5 @@ onEdit = true
 
 [[language]]
 name = "markdown"
-soft-wrap.enable = true
+# soft-wrap.enable = true
 language-servers = ["markdown-oxide", "ltex-ls-plus"]
