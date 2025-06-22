@@ -3,16 +3,17 @@ SHELL := /bin/bash
 UNAME := $(shell uname -s)
 
 .PHONY: all
-all: helix cargo-pkgs clangd fzf ltex-ls-plus uv-venv
+all: helix cargo-pkgs clangd fzf ltex-ls-plus uv-venv pandoc
 
 .PHONY: pandoc
 pandoc: link
 	VERSION=3.7.0.2
-	FILE=pandoc-$$VERSION
-	curl -LO https://github.com/jgm/pandoc/releases/download/$$VERSION/$$FILE-linux-amd64.tar.gz
-	tar xzf $$FILE-linux-amd64.tar.gz
-	ln -sf $$PWD/$$FILE/bin/* $$MYHOME/.local/bin
-	rm $$FILE-linux-amd64.tar.gz
+	FOLDER=pandoc-$$VERSION
+	[[ $(UNAME) == Darwin ]] && FILE=$$FOLDER-arm64-macOS.zip || FILE=$$FOLDER-linux-amd64.tar.gz
+	curl -LO https://github.com/jgm/pandoc/releases/download/$$VERSION/$$FILE
+	[[ $(UNAME) == Darwin ]] && unzip $$FILE || tar xzf $$FILE
+	[[ $(UNAME) == Darwin ]] && ln -sf $$PWD/$$FOLDER-arm64/bin/* $$MYHOME/.local/bin || ln -sf $$PWD/$$FOLDER/bin/* $$MYHOME/.local/bin
+	rm $$FILE
 
 .PHONY: ltex-ls-plus
 ltex-ls-plus: link
@@ -65,7 +66,6 @@ helix: cargo link
 	cd helix
 	cargo xtask steel
 	ln -sf $$PWD/runtime ../dothelix/runtime
-	forge pkg install --git https://github.com/mattwparas/steel-pty
 
 .PHONY: fzf
 fzf: link
