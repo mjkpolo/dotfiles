@@ -5,6 +5,15 @@ UNAME := $(shell uname -s)
 .PHONY: all
 all: helix cargo-pkgs clangd fzf ltex-ls-plus uv-venv
 
+.PHONY: pandoc
+pandoc: link
+	VERSION=3.7.0.2
+	FILE=pandoc-$$VERSION
+	curl -LO https://github.com/jgm/pandoc/releases/download/$$VERSION/$$FILE-linux-amd64.tar.gz
+	tar xzf $$FILE-linux-amd64.tar.gz
+	ln -sf $$PWD/$$FILE/bin/* $$MYHOME/.local/bin
+	rm $$FILE-linux-amd64.tar.gz
+
 .PHONY: ltex-ls-plus
 ltex-ls-plus: link
 	VERSION=18.5.1
@@ -46,14 +55,17 @@ cargo-pkgs: cargo
 	cargo install --git https://github.com/astral-sh/uv uv --locked
 	cargo install --locked --git https://github.com/Feel-ix-343/markdown-oxide.git markdown-oxide
 	cargo install --locked --git https://github.com/zellij-org/zellij.git zellij --tag v0.42.2
+	cargo install --locked --git https://github.com/mfontanini/presenterm --tag v0.14.0
+	cargo install --git https://github.com/typst/typst --locked typst-cli --tag v0.13.1
 
 .PHONY: helix
 helix: cargo link
 	source bashrc
 	. $$CARGO_HOME/env
 	cd helix
-	cargo install --path helix-term --locked
+	cargo xtask steel
 	ln -sf $$PWD/runtime ../dothelix/runtime
+	forge pkg install --git https://github.com/mattwparas/steel-pty
 
 .PHONY: fzf
 fzf: link

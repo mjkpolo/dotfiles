@@ -8,3 +8,7 @@
 [submodule "tmux-modal"]
 	path = tmux-modal
 	url = git@github.com:mjkpolo/tmux-modal.git
+[submodule "dothelix"]
+	path = dothelix
+	url = git@github.com:mjkpolo/helix-config.git
+	ignore = dirty

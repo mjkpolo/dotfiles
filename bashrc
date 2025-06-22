@@ -5,6 +5,10 @@ export MYHOME=$HOME
 
 export CARGO_HOME=$MYHOME/.cargo
 export RUSTUP_HOME=$MYHOME/.rustup
+export PATH=$MYHOME/.local/bin:$MYHOME/go/bin:$MYHOME/.local/go/bin:$PATH
+export LD_LIBRARY_PATH=$MYHOME/.local/lib:$LD_LIBRARY_PATH
+export MANPATH=$MYHOME/.local/share/man:$MANPATH
+export PKG_CONFIG_PATH=$MYHOME/.local/lib/pkgconfig:$PKG_CONFIG_PATH
 
 # above no prompt return so makefile can source
 
@@ -33,11 +37,6 @@ alias ls="ls --color=auto"
 export GPG_TTY=$(tty)
 
 export PS1='[\[\e[1;35m\]\w\[\e[0m\]@\[\e[1;34m\]\H\[\e[0m\]]\n\$ '
-
-export PATH=$MYHOME/.local/bin:$PATH
-export LD_LIBRARY_PATH=$MYHOME/.local/lib:$LD_LIBRARY_PATH
-export MANPATH=$MYHOME/.local/share/man:$MANPATH
-export PKG_CONFIG_PATH=$MYHOME/.local/lib/pkgconfig:$PKG_CONFIG_PATH
 
 [[ $(uname -s) == "Darwin" ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
 export EDITOR=hx
