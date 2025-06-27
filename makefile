@@ -45,6 +45,8 @@ uv-venv: cargo-pkgs
 	source bashrc
 	. $$CARGO_HOME/env
 	[[ -d $$MYHOME/.venv ]] || uv venv $$MYHOME/.venv
+	source $$MYHOME/.venv/bin/activate
+	uv pip install weasyprint
 
 .PHONY: cargo-pkgs
 cargo-pkgs: cargo
