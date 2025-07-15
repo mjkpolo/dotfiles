@@ -3,7 +3,11 @@ SHELL := /bin/bash
 UNAME := $(shell uname -s)
 
 .PHONY: all
-all: helix cargo-pkgs clangd fzf ltex-ls-plus uv-venv pandoc
+all: helix cargo-pkgs fzf uv-venv
+
+
+.PHONY: extra
+extra: pandoc extra-cargo-pkgs clangd ltex-ls-plus
 
 .PHONY: pandoc
 pandoc: link
@@ -48,18 +52,24 @@ uv-venv: cargo-pkgs
 	source $$MYHOME/.venv/bin/activate
 	uv pip install weasyprint
 
+.PHONY: extra-cargo-pkgs
+extra-cargo-pkgs: cargo
+	source bashrc
+	. $$CARGO_HOME/env
+	cargo install --git https://github.com/latex-lsp/texlab --locked --tag v5.21.0
+	cargo install --locked --git https://github.com/Feel-ix-343/markdown-oxide.git markdown-oxide
+	cargo install --locked --git https://github.com/mfontanini/presenterm --tag v0.14.0
+	cargo install --git https://github.com/typst/typst --locked typst-cli --tag v0.13.1
+
+
 .PHONY: cargo-pkgs
 cargo-pkgs: cargo
 	source bashrc
 	. $$CARGO_HOME/env
 	cargo install fd-find --locked
 	cargo install ripgrep --locked
-	cargo install --git https://github.com/latex-lsp/texlab --locked --tag v5.21.0
 	cargo install --git https://github.com/astral-sh/uv uv --locked
-	cargo install --locked --git https://github.com/Feel-ix-343/markdown-oxide.git markdown-oxide
 	cargo install --locked --git https://github.com/zellij-org/zellij.git zellij --tag v0.42.2
-	cargo install --locked --git https://github.com/mfontanini/presenterm --tag v0.14.0
-	cargo install --git https://github.com/typst/typst --locked typst-cli --tag v0.13.1
 
 .PHONY: helix
 helix: cargo link
