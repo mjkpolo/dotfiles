@@ -58,7 +58,7 @@ extra-cargo-pkgs: cargo
 	. $$CARGO_HOME/env
 	cargo install --git https://github.com/latex-lsp/texlab --locked --tag v5.21.0
 	cargo install --locked --git https://github.com/Feel-ix-343/markdown-oxide.git markdown-oxide
-	cargo install --locked --git https://github.com/mfontanini/presenterm --tag v0.14.0
+	cargo install --locked --git https://github.com/mfontanini/presenterm --tag master
 	cargo install --git https://github.com/typst/typst --locked typst-cli --tag v0.13.1
 
 
@@ -169,6 +169,7 @@ link: setup
 	unlink_or_remove config.github config.github
 	unlink_or_remove config.gitlab config.gitlab
 	unlink_or_remove gitconfig .gitconfig
+	unlink_or_remove dotpresenterm .config/presenterm
 
 .PHONY: setup
 setup:
