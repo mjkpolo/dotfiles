@@ -68,3 +68,5 @@ alias yacc="bison"
 export YT_PROXY=delta.yt.nebius.yt
 export YT_CONFIG_PATCHES="{proxy={force_ipv4=%true}}"
 XDG_DATA_DIRS="${XDG_DATA_DIRS}:${MYHOME}/.local/share/flatpak/exports/share"
+export UV_CACHE_DIR=$MYHOME/.cache/uv
+[[ -f $MYHOME/.hftoken ]] && . $MYHOME/.hftoken
