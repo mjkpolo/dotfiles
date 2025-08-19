@@ -9,6 +9,7 @@ export PATH=$MYHOME/.local/bin:$MYHOME/go/bin:$MYHOME/.local/go/bin:$PATH
 export LD_LIBRARY_PATH=$MYHOME/.local/lib:$LD_LIBRARY_PATH
 export MANPATH=$MYHOME/.local/share/man:$MANPATH
 export PKG_CONFIG_PATH=$MYHOME/.local/lib/pkgconfig:$PKG_CONFIG_PATH
+export UV_CACHE_DIR=$MYHOME/.cache/uv
 
 # above no prompt return so makefile can source
 
@@ -62,11 +63,6 @@ alias ta="tmux attach -t $(get_sesh_name)"
 alias tc="tmux new -s $(get_sesh_name)"
 alias tk="tmux kill-server"
 alias yacc="bison"
+alias today="date +%Y_%m_%d"
 . "$MYHOME/.cargo/env"
 . "$MYHOME/.venv/bin/activate"
-
-export YT_PROXY=delta.yt.nebius.yt
-export YT_CONFIG_PATCHES="{proxy={force_ipv4=%true}}"
-XDG_DATA_DIRS="${XDG_DATA_DIRS}:${MYHOME}/.local/share/flatpak/exports/share"
-export UV_CACHE_DIR=$MYHOME/.cache/uv
-[[ -f $MYHOME/.hftoken ]] && . $MYHOME/.hftoken

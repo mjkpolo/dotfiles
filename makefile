@@ -164,7 +164,7 @@ link: setup
 	unlink_or_remove bashrc .bashrc
 	unlink_or_remove dothelix .config/helix
 	unlink_or_remove tmux.conf .tmux.conf
-	unlink_or_remove dotwezterm.lua .wezterm.lua
+	unlink_or_remove dotghostty .config/ghostty
 	unlink_or_remove dotzellij .config/zellij
 	unlink_or_remove config.github config.github
 	unlink_or_remove config.gitlab config.gitlab

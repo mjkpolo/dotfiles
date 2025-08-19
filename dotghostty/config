@@ -1,0 +1,4 @@
+font-family = Monaspace Argon Frozen
+font-size = 20
+theme = catppuccin-mocha.conf
+custom-shader = shaders/cursor_frozen.glsl
