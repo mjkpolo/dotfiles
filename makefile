@@ -69,7 +69,7 @@ cargo-pkgs: cargo
 	cargo install fd-find --locked
 	cargo install ripgrep --locked
 	cargo install --git https://github.com/astral-sh/uv uv --locked
-	cargo install --locked --git https://github.com/zellij-org/zellij.git zellij --tag v0.42.2
+	cargo install --locked --git https://github.com/zellij-org/zellij.git zellij --tag v0.43.1
 
 .PHONY: helix
 helix: cargo link

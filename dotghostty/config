@@ -1,5 +1,6 @@
 font-family = Monaspace Argon Frozen
-theme = gruber-darker
+# theme = gruber-darker
+theme = catppuccin-mocha
 custom-shader = shaders/cursor_frozen.glsl
 custom-shader = shaders/starfield.glsl
 font-size = 19
