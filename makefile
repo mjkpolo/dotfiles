@@ -32,7 +32,7 @@ ltex-ls-plus: link
 
 .PHONY: clangd
 clangd: link
-	VERSION=19.1.2
+	VERSION=20.1.8
 	source bashrc
 	[[ $(UNAME) == Darwin ]] && FILE=clangd-mac || FILE=clangd-linux
 	curl -LO https://github.com/clangd/clangd/releases/download/$$VERSION/$$FILE-$$VERSION.zip
@@ -170,6 +170,7 @@ link: setup
 	unlink_or_remove config.gitlab config.gitlab
 	unlink_or_remove gitconfig .gitconfig
 	unlink_or_remove dotpresenterm .config/presenterm
+	unlink_or_remove dotzathura .config/zathura
 
 .PHONY: setup
 setup:

@@ -11,7 +11,7 @@ const float repeats = 30.;
 const float layers = 21.;
 
 // star colors
-const vec3 white = vec3(0.9); // Set star color to pure white
+const vec3 white = vec3(0.5); // Set star color to pure white
 
 float luminance(vec3 color) {
     return dot(color, vec3(0.2126, 0.7152, 0.0722));
@@ -95,7 +95,7 @@ vec3 stars(vec2 uv, float offset) {
 
     // Calculate random xy and size
     vec2 rndXY = N22(newRnd + ipos * (offset + 1.)) * 1.9 + 0.05;
-    float rndSize = N21(ipos) * 100. + 200.;
+    float rndSize = N21(ipos) * 20. + 500.;
 
     vec2 j = (rndXY - uv) * rndSize;
     float sparkle = 1. / dot(j, j);

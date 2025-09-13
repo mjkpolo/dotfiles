@@ -3,9 +3,9 @@
 # change home here
 export MYHOME=$HOME
 
+export TERMINFO=$MYHOME/.terminfo
 export CARGO_HOME=$MYHOME/.cargo
 export RUSTUP_HOME=$MYHOME/.rustup
-export PATH=$MYHOME/.local/bin:$MYHOME/go/bin:$MYHOME/.local/go/bin:$PATH
 export LD_LIBRARY_PATH=$MYHOME/.local/lib:$LD_LIBRARY_PATH
 export MANPATH=$MYHOME/.local/share/man:$MANPATH
 export PKG_CONFIG_PATH=$MYHOME/.local/lib/pkgconfig:$PKG_CONFIG_PATH
@@ -66,3 +66,4 @@ alias yacc="bison"
 alias today="date +%Y_%m_%d"
 . "$MYHOME/.cargo/env"
 . "$MYHOME/.venv/bin/activate"
+alias today="date +%Y_%m_%d"
