@@ -39,6 +39,13 @@ clangd: link
 	unzip $$FILE-$$VERSION.zip && cp -R clangd_$$VERSION/bin/* $$MYHOME/.local/bin/ && cp -R clangd_$$VERSION/lib/* $$MYHOME/.local/lib/
 	rm -rf clangd*
 
+.PHONY: btop
+btop:
+	source bashrc
+	cd btop
+	make -j
+	PREFIX=$$MYHOME/.local make install
+
 .PHONY: cargo
 cargo:
 	source bashrc

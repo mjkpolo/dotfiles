@@ -12,3 +12,6 @@
 	path = dothelix
 	url = git@github.com:mjkpolo/helix-config.git
 	ignore = dirty
+[submodule "btop"]
+	path = btop
+	url = git@github.com:aristocratos/btop.git
