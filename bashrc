@@ -6,10 +6,13 @@ export MYHOME=$HOME
 export TERMINFO=$MYHOME/.terminfo
 export CARGO_HOME=$MYHOME/.cargo
 export RUSTUP_HOME=$MYHOME/.rustup
-export LD_LIBRARY_PATH=$MYHOME/.local/lib:$LD_LIBRARY_PATH
+export PATH=$MYHOME/.local/bin:$MYHOME/go/bin:$MYHOME/.local/go/bin:$PATH
+export LD_LIBRARY_PATH=$MYHOME/.local/lib/x86_64-linux-gnu:$MYHOME/.local/lib:$LD_LIBRARY_PATH
 export MANPATH=$MYHOME/.local/share/man:$MANPATH
-export PKG_CONFIG_PATH=$MYHOME/.local/lib/pkgconfig:$PKG_CONFIG_PATH
+export PKG_CONFIG_PATH=$MYHOME/.local/share/pkgconfig:$MYHOME/.local/lib/x86_64-linux-gnu/pkgconfig:$MYHOME/.local/lib/pkgconfig:$PKG_CONFIG_PATH
 export UV_CACHE_DIR=$MYHOME/.cache/uv
+export CXX=/usr/bin/clang++-19
+export CC=/usr/bin/clang-19
 
 # above no prompt return so makefile can source
 
@@ -67,3 +70,8 @@ alias today="date +%Y_%m_%d"
 . "$MYHOME/.cargo/env"
 . "$MYHOME/.venv/bin/activate"
 alias today="date +%Y_%m_%d"
+
+export YT_PROXY=delta.yt.nebius.yt
+export YT_CONFIG_PATCHES="{proxy={force_ipv4=%true}}"
+XDG_DATA_DIRS="${XDG_DATA_DIRS}:${MYHOME}/.local/share/flatpak/exports/share"
+[[ -f $MYHOME/.hftoken ]] && . $MYHOME/.hftoken

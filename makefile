@@ -3,7 +3,7 @@ SHELL := /bin/bash
 UNAME := $(shell uname -s)
 
 .PHONY: all
-all: helix cargo-pkgs fzf uv-venv
+all: helix cargo-pkgs fzf uv-venv btop
 
 
 .PHONY: extra
@@ -63,10 +63,11 @@ uv-venv: cargo-pkgs
 extra-cargo-pkgs: cargo
 	source bashrc
 	. $$CARGO_HOME/env
-	cargo install --git https://github.com/latex-lsp/texlab --locked --tag v5.21.0
+	cargo install --git https://github.com/latex-lsp/texlab --locked --tag v5.23.1
 	cargo install --locked --git https://github.com/Feel-ix-343/markdown-oxide.git markdown-oxide
 	cargo install --locked --git https://github.com/mfontanini/presenterm --tag master
-	cargo install --git https://github.com/typst/typst --locked typst-cli --tag v0.13.1
+	cargo install --locked --git https://github.com/typst/typst typst-cli --tag v0.13.1
+	cargo install --locked --git https://github.com/Myriad-Dreamin/tinymist tinymist-cli --tag v0.13.26
 
 
 .PHONY: cargo-pkgs
