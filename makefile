@@ -84,7 +84,12 @@ helix: cargo link
 	source bashrc
 	. $$CARGO_HOME/env
 	cd helix
-	cargo xtask steel
+	cargo install \
+	   --profile opt \
+	   --config 'build.rustflags="-C target-cpu=native"' \
+	   --path helix-term \
+	   --locked
+	# cargo xtask steel
 	ln -sf $$PWD/runtime ../dothelix/runtime
 
 .PHONY: fzf
