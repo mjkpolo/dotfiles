@@ -61,3 +61,16 @@ alias today="date +%Y_%m_%d"
 . "$MYHOME/.cargo/env"
 . "$MYHOME/.venv/bin/activate"
 alias today="date +%Y_%m_%d"
+
+ovrpush() {
+  while true; do
+    if ! git pull; then
+      return 1
+    fi
+
+    if git push; then
+      return 0
+    fi
+  done
+}
+

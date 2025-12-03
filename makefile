@@ -84,12 +84,12 @@ helix: cargo link
 	source bashrc
 	. $$CARGO_HOME/env
 	cd helix
-	cargo install \
-	   --profile opt \
-	   --config 'build.rustflags="-C target-cpu=native"' \
-	   --path helix-term \
-	   --locked
-	# cargo xtask steel
+	# cargo install \
+	#    --profile opt \
+	#    --config 'build.rustflags="-C target-cpu=native"' \
+	#    --path helix-term \
+	#    --locked
+	cargo xtask steel
 	ln -sf $$PWD/runtime ../dothelix/runtime
 
 .PHONY: fzf
@@ -177,13 +177,14 @@ link: setup
 	unlink_or_remove bashrc .bashrc
 	unlink_or_remove dothelix .config/helix
 	unlink_or_remove tmux.conf .tmux.conf
-	unlink_or_remove dotghostty .config/ghostty
 	unlink_or_remove dotzellij .config/zellij
 	unlink_or_remove config.github config.github
 	unlink_or_remove config.gitlab config.gitlab
 	unlink_or_remove gitconfig .gitconfig
 	unlink_or_remove dotpresenterm .config/presenterm
 	unlink_or_remove dotzathura .config/zathura
+	unlink_or_remove dotghostty .config/ghostty
+	# unlink_or_remove dotalacritty .config/alacritty
 
 .PHONY: setup
 setup:

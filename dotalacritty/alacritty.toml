@@ -1,0 +1,13 @@
+[general]
+import = [
+  "rose-pine-moon.toml",
+]
+
+[font]
+size = 22.0
+
+[font.normal]
+family = "SF Mono"
+
+[window]
+option_as_alt = "Both"
