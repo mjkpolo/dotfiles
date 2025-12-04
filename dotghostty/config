@@ -1,7 +1,7 @@
 font-family = Monaspace Argon Frozen
 # theme = catppuccin-latte
 # theme = rose-pine-moon
-theme = rose-pine
+theme = NvimDark
 # custom-shader = shaders/cursor_frozen.glsl
 # custom-shader = shaders/cursor_smear.glsl
 # custom-shader = shaders/starfield.glsl
