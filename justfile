@@ -76,7 +76,7 @@ uv-download \
 (_link join(uv_fn, "uvx") ".local/bin/uvx") \
 (_link ".cache/uv" ".cache/uv") \
 (_link ".venv" ".venv")
-    uv venv --python=3.12 .venv
+    uv venv --clear --python=3.12 .venv
 
 uv-download: setup
     curl --proto '=https' --tlsv1.2 -sSfLO https://releases.astral.sh/github/uv/releases/download/{{uv_ver}}/{{uv_fn}}.tar.gz
