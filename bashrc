@@ -35,10 +35,10 @@ VIRTUAL_ENV_DISABLE_PROMPT=1
 [[ $(uname -s) == "Darwin" ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
 
 _scancel_fzf_completion() {
-  local selected_job
-  selected_job=$(squeue --me | tail -n +2 | fzf --prompt="Select a job to cancel: " | awk '{print $1}')
-  if [[ -n "$selected_job" ]]; then
-    COMPREPLY=("$selected_job")
+  local selected_jobs
+  selected_jobs=$(squeue --me | tail -n +2 | fzf --multi --prompt="Select jobs to cancel: " | awk '{print $1}' | paste -sd' ' -)
+  if [[ -n "$selected_jobs" ]]; then
+    COMPREPLY=("$selected_jobs")
   else
     COMPREPLY=()
   fi
