@@ -55,16 +55,16 @@ rg-download: setup
 
 
 fd_ver := "v10.4.2"
-fd_fn := "fd-" + fd_ver + "-" + arch + "-unknown-" + os
+fd_fn := "fd-" + fd_ver + "-" + arch + "-unknown-" + os + "-musl"
 
 fd-link: \
 fd-download \
 (_link join(fd_fn, "fd") ".local/bin/fd") \
 
 fd-download: setup
-    curl --proto '=https' --tlsv1.2 -sSfLO https://github.com/sharkdp/fd/releases/download/{{fd_ver}}/{{fd_fn}}-musl.tar.gz
-    tar -xf {{fd_fn}}-musl.tar.gz
-    rm -f {{fd_fn}}-musl.tar.gz
+    curl --proto '=https' --tlsv1.2 -sSfLO https://github.com/sharkdp/fd/releases/download/{{fd_ver}}/{{fd_fn}}.tar.gz
+    tar -xf {{fd_fn}}.tar.gz
+    rm -f {{fd_fn}}.tar.gz
 
 
 uv_ver := "0.11.21"
