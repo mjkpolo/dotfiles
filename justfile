@@ -11,6 +11,12 @@ arch := arch()
 JD := justfile_directory()
 GH := "https://github.com"
 
+chafa_ver := "1.18.2-1"
+chafa_fn := "chafa-" + chafa_ver + "-" + arch + "-" + os + "-gnu"
+chafa: \
+    (_get "https://hpjansson.org/chafa/releases/static/" + chafa_fn + ".tar.gz") \
+    (_link join(chafa_fn, "chafa") ".local/bin/chafa")
+
 lazygit_ver := "0.62.2"
 lazygit_fn := "lazygit_" + lazygit_ver + "_" + os + "_" + arch
 lazygit: \
@@ -79,7 +85,7 @@ uv: \
 (_link join(uv_fn, "uvx") ".local/bin/uvx") \
 (_link ".cache/uv" ".cache/uv") \
 (_link ".venv" ".venv")
-    uv venv --clear --python=3.12 .venv
+    uv venv --clear --python=3.14 .venv
 
 [parallel]
 link-dotfiles: \
@@ -105,7 +111,8 @@ zellij \
 fuc \
 btop \
 texlab \
-lazygit
+lazygit \
+chafa
 
 setup: \
 (_mkdir "$HOME/.local/bin") \

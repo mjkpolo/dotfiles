@@ -5,8 +5,6 @@
 . ~/.env
 [[ -f ~/.secretenv ]] && . ~/.secretenv
 
-. ~/.venv/bin/activate
-
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
 HISTCONTROL=ignoredups:ignorespace
@@ -18,8 +16,8 @@ shopt -s histappend
 set -o vi
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=10000
+HISTFILESIZE=20000
 
 # Source global definitions
 [[ -f /etc/bashrc ]] && . /etc/bashrc
@@ -30,6 +28,9 @@ alias ls="ls --color=auto"
 export GPG_TTY=$(tty)
 
 export PS1='[\[\e[1;35m\]\w\[\e[0m\]@\[\e[1;34m\]\H\[\e[0m\]]\n\$ '
+
+VIRTUAL_ENV_DISABLE_PROMPT=1
+. ~/.venv/bin/activate
 
 [[ $(uname -s) == "Darwin" ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
 
@@ -48,7 +49,6 @@ complete -F _scancel_fzf_completion scancel
 eval "$(fzf --bash)"
 
 alias yacc="bison"
-alias today="date +%Y_%m_%d"
 alias today="date +%Y_%m_%d"
 
 ovrpush() {
