@@ -11,7 +11,6 @@ arch := arch()
 JD := justfile_directory()
 GH := "https://github.com"
 
-# https://github.com/jesseduffield/lazygit/releases/download/v0.62.2/lazygit_0.62.2_linux_x86_64.tar.gz
 lazygit_ver := "0.62.2"
 lazygit_fn := "lazygit_" + lazygit_ver + "_" + os + "_" + arch
 lazygit: \
@@ -23,7 +22,6 @@ texlab_fn := "texlab-" + arch + "-" + os
 texlab: \
     (_get GH + "/latex-lsp/texlab/releases/download/v" + texlab_ver + "/" + texlab_fn + ".tar.gz") \
     (_link "texlab" ".local/bin/texlab")
-# https://github.com/
 
 btop_ver := "v1.4.7"
 btop_fn := "btop-" + arch + "-unknown-" + os + "-musl"
