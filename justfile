@@ -12,30 +12,36 @@ arch2 := if arch == "x86_64" { "amd64" } else { arch }
 JD := justfile_directory()
 GH := "https://github.com"
 
+cmake_ver := "4.3.3"
+cmake_fn := "cmake-" + cmake_ver + "-" + os + "-" + arch
+cmake: \
+(_get GH + "/Kitware/CMake/releases/download/v" + cmake_ver + "/" + cmake_fn + ".tar.gz") \
+(_link join(cmake_fn, "bin/cmake") ".local/bin/cmake")
+
 gitlfs_ver := "v3.7.1"
 gitlfs_fn := "git-lfs-" + os + "-" + arch2 + "-" + gitlfs_ver
 gitlfs: \
-    (_get_output GH + "/git-lfs/git-lfs/releases/download/" + gitlfs_ver + "/" + gitlfs_fn + ".tar.gz" gitlfs_fn "1") \
-    (_link join(gitlfs_fn, "git-lfs") ".local/bin/git-lfs")
+(_get_output GH + "/git-lfs/git-lfs/releases/download/" + gitlfs_ver + "/" + gitlfs_fn + ".tar.gz" gitlfs_fn "1") \
+(_link join(gitlfs_fn, "git-lfs") ".local/bin/git-lfs")
     git lfs install
 
 chafa_ver := "1.18.2-1"
 chafa_fn := "chafa-" + chafa_ver + "-" + arch + "-" + os + "-gnu"
 chafa: \
-    (_get "https://hpjansson.org/chafa/releases/static/" + chafa_fn + ".tar.gz") \
-    (_link join(chafa_fn, "chafa") ".local/bin/chafa")
+(_get "https://hpjansson.org/chafa/releases/static/" + chafa_fn + ".tar.gz") \
+(_link join(chafa_fn, "chafa") ".local/bin/chafa")
 
 lazygit_ver := "0.62.2"
 lazygit_fn := "lazygit_" + lazygit_ver + "_" + os + "_" + arch
 lazygit: \
-    (_get_output GH + "/jesseduffield/lazygit/releases/download/v" + lazygit_ver + "/" + lazygit_fn + ".tar.gz" lazygit_fn "0") \
-    (_link join(lazygit_fn, "lazygit") ".local/bin/lazygit")
+(_get_output GH + "/jesseduffield/lazygit/releases/download/v" + lazygit_ver + "/" + lazygit_fn + ".tar.gz" lazygit_fn "0") \
+(_link join(lazygit_fn, "lazygit") ".local/bin/lazygit")
 
 texlab_ver := "5.25.1"
 texlab_fn := "texlab-" + arch + "-" + os
 texlab: \
-    (_get GH + "/latex-lsp/texlab/releases/download/v" + texlab_ver + "/" + texlab_fn + ".tar.gz") \
-    (_link "texlab" ".local/bin/texlab")
+(_get GH + "/latex-lsp/texlab/releases/download/v" + texlab_ver + "/" + texlab_fn + ".tar.gz") \
+(_link "texlab" ".local/bin/texlab")
 
 btop_ver := "v1.4.7"
 btop_fn := "btop-" + arch + "-unknown-" + os + "-musl"
@@ -119,7 +125,9 @@ fuc \
 btop \
 texlab \
 lazygit \
-chafa
+chafa \
+gitlfs \
+cmake
 
 setup: \
 (_mkdir "$HOME/.local/bin") \
