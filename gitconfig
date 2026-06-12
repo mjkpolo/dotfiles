@@ -3,6 +3,7 @@
 
 [includeIf "gitdir:**/gitlab/"]
   path = ~/config.gitlab
+
 [commit]
 	gpgsign = true
 [filter "lfs"]
@@ -16,5 +17,3 @@
 	rebase = true
 [net]
 	git-fetch-with-cli = false
-[safe]
-	directory = /home/mkurzyns/framework-test/Nanoflow

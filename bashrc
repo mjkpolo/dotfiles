@@ -32,7 +32,6 @@ export GPG_TTY=$(tty)
 export PS1='[\[\e[1;35m\]\w\[\e[0m\]@\[\e[1;34m\]\H\[\e[0m\]]\n\$ '
 
 [[ $(uname -s) == "Darwin" ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
-export EDITOR=hx
 
 _scancel_fzf_completion() {
   local selected_job
@@ -45,7 +44,8 @@ _scancel_fzf_completion() {
 }
 
 complete -F _scancel_fzf_completion scancel
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+eval "$(fzf --bash)"
 
 alias yacc="bison"
 alias today="date +%Y_%m_%d"

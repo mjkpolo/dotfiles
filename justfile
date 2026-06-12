@@ -11,10 +11,30 @@ arch := arch()
 JD := justfile_directory()
 GH := "https://github.com"
 
+# https://github.com/jesseduffield/lazygit/releases/download/v0.62.2/lazygit_0.62.2_linux_x86_64.tar.gz
+lazygit_ver := "0.62.2"
+lazygit_fn := "lazygit_" + lazygit_ver + "_" + os + "_" + arch
+lazygit: \
+    (_get_output GH + "/jesseduffield/lazygit/releases/download/v" + lazygit_ver + "/" + lazygit_fn + ".tar.gz" lazygit_fn) \
+    (_link join(lazygit_fn, "lazygit") ".local/bin/lazygit")
+
+texlab_ver := "5.25.1"
+texlab_fn := "texlab-" + arch + "-" + os
+texlab: \
+    (_get GH + "/latex-lsp/texlab/releases/download/v" + texlab_ver + "/" + texlab_fn + ".tar.gz") \
+    (_link "texlab" ".local/bin/texlab")
+# https://github.com/
+
+btop_ver := "v1.4.7"
+btop_fn := "btop-" + arch + "-unknown-" + os + "-musl"
+btop: \
+(_get GH + "/aristocratos/btop/releases/download/" + btop_ver + "/" + btop_fn + ".tar.gz") \
+(_link "btop/bin/btop" ".local/bin/btop")
+
 fuc_ver := "3.1.1"
 fuc_cpz_fn := arch + "-unknown-" + os + "-gnu-cpz"
 fuc_rmz_fn := arch + "-unknown-" + os + "-gnu-rmz"
-fuc-link: \
+fuc: \
 (_getbin GH + "/SUPERCILEX/fuc/releases/download/" + fuc_ver + "/" + fuc_cpz_fn) \
 (_getbin GH + "/SUPERCILEX/fuc/releases/download/" + fuc_ver + "/" + fuc_rmz_fn) \
 (_link fuc_cpz_fn ".local/bin/cpz") \
@@ -22,39 +42,39 @@ fuc-link: \
 
 helix_ver := "1"
 helix_fn := "helix-" + helix_ver + "-" + arch + "-" + os
-helix-link: \
+helix: \
 (_get GH + "/mjkpolo/helix/releases/download/" + helix_ver + "/" + helix_fn + ".tar.xz") \
 (_link join(helix_fn, "hx") ".local/bin/hx") \
 (_link join(helix_fn, "runtime") ".config/helix/runtime")
 
 rg_ver := "15.1.0"
 rg_fn := "ripgrep-" + rg_ver + "-" + arch + "-unknown-" + os + "-musl"
-rg-link: \
+rg: \
 (_get GH + "/BurntSushi/ripgrep/releases/download/" + rg_ver + "/" + rg_fn + ".tar.gz") \
 (_link join(rg_fn, "rg") ".local/bin/rg")
 
 fd_ver := "v10.4.2"
 fd_fn := "fd-" + fd_ver + "-" + arch + "-unknown-" + os + "-musl"
-fd-link: \
+fd: \
 (_get GH + "/sharkdp/fd/releases/download/" + fd_ver + "/" + fd_fn + ".tar.gz") \
 (_link join(fd_fn, "fd") ".local/bin/fd")
 
 fzf_ver := "0.73.1"
 fzf_arch := if arch == "x86_64" { "amd64" } else { arch }
 fzf_fn := "fzf-" + fzf_ver + "-" + os + "_" + fzf_arch
-fzf-link: \
+fzf: \
 (_get GH + "/junegunn/fzf/releases/download/v" + fzf_ver + "/" + fzf_fn + ".tar.gz") \
 (_link "fzf" ".local/bin/fzf")
 
 zellij_ver := "1"
 zellij_fn := "zellij-no-web-" + arch + "-unknown-" + os + "-musl"
-zellij-link: \
+zellij: \
 (_get GH + "/mjkpolo/zellij/releases/download/" + zellij_ver + "/" + zellij_fn + ".tar.gz") \
 (_link "zellij" ".local/bin/zellij")
 
 uv_ver := "0.11.21"
 uv_fn := "uv-" + arch + "-unknown-" + os + "-musl"
-uv-link: \
+uv: \
 (_get "https://releases.astral.sh/github/uv/releases/download/" + uv_ver + "/" + uv_fn + ".tar.gz") \
 (_mkdir ".cache/uv") \
 (_link join(uv_fn, "uv") ".local/bin/uv") \
@@ -73,17 +93,21 @@ link-dotfiles: \
 (_link "gitconfig" ".gitconfig") \
 (_link "dotzathura" ".config/zathura") \
 (_link "dothelix" ".config/helix") \
+(_link "dotbtop" ".config/btop") \
 (_secret_link "secretenv" ".secretenv")
 
 [parallel]
 link-binaries: link-dotfiles \
-helix-link \
-rg-link \
-fd-link \
-uv-link \
-fzf-link \
-zellij-link \
-fuc-link
+helix \
+rg \
+fd \
+uv \
+fzf \
+zellij \
+fuc \
+btop \
+texlab \
+lazygit
 
 setup: \
 (_mkdir "$HOME/.local/bin") \
@@ -96,6 +120,12 @@ _mkdir dir:
 _get url: setup
     curl --proto '=https' --tlsv1.2 -sSfLO {{url}}
     tar -xf {{file_name(url)}}
+    rm -f {{file_name(url)}}
+
+_get_output url output: setup
+    curl --proto '=https' --tlsv1.2 -sSfLO {{url}}
+    mkdir -p {{output}}
+    tar -xf {{file_name(url)}} -C {{output}}
     rm -f {{file_name(url)}}
 
 _getbin url: setup

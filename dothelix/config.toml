@@ -1,4 +1,4 @@
-theme = "nvim-dark"
+theme = "gruber-darker"
 
 [editor]
 line-number = "relative"
