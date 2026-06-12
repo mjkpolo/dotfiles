@@ -25,7 +25,8 @@ cmake_ver := "4.3.3"
 cmake_fn := "cmake-" + cmake_ver + "-" + os + "-" + arch
 cmake: \
 (_get GH + "/Kitware/CMake/releases/download/v" + cmake_ver + "/" + cmake_fn + ".tar.gz") \
-(_link join(cmake_fn, "bin/cmake") ".local/bin/cmake")
+(_link join(cmake_fn, "bin/cmake") ".local/bin/cmake") \
+(_link join(cmake_fn, "share/bash-completion/completions/cmake") ".local/share/bash-completion/completions/cmake")
 
 gitlfs_ver := "v3.7.1"
 gitlfs_fn := "git-lfs-" + os + "-" + arch2 + "-" + gitlfs_ver
@@ -72,19 +73,22 @@ helix_fn := "helix-" + helix_ver + "-" + arch + "-" + os
 helix: \
 (_get GH + "/mjkpolo/helix/releases/download/" + helix_ver + "/" + helix_fn + ".tar.xz") \
 (_link join(helix_fn, "hx") ".local/bin/hx") \
-(_link join(helix_fn, "runtime") ".config/helix/runtime")
+(_link join(helix_fn, "runtime") ".config/helix/runtime") \
+(_link join(helix_fn, "contrib/completion/hx.bash") ".local/share/bash-completion/completions/hx.bash")
 
 rg_ver := "15.1.0"
 rg_fn := "ripgrep-" + rg_ver + "-" + arch + "-unknown-" + os + "-musl"
 rg: \
 (_get GH + "/BurntSushi/ripgrep/releases/download/" + rg_ver + "/" + rg_fn + ".tar.gz") \
-(_link join(rg_fn, "rg") ".local/bin/rg")
+(_link join(rg_fn, "rg") ".local/bin/rg") \
+(_link join(rg_fn, "complete/rg.bash") ".local/share/bash-completion/completions/rg.bash")
 
 fd_ver := "v10.4.2"
 fd_fn := "fd-" + fd_ver + "-" + arch + "-unknown-" + os + "-musl"
 fd: \
 (_get GH + "/sharkdp/fd/releases/download/" + fd_ver + "/" + fd_fn + ".tar.gz") \
-(_link join(fd_fn, "fd") ".local/bin/fd")
+(_link join(fd_fn, "fd") ".local/bin/fd") \
+(_link join(fd_fn, "autocomplete/fd.bash") ".local/share/bash-completion/completions/fd.bash")
 
 fzf_ver := "0.73.1"
 fzf_fn := "fzf-" + fzf_ver + "-" + os + "_" + arch2
@@ -142,6 +146,7 @@ zoxide
 setup: \
 (_mkdir "$HOME/.local/bin") \
 (_mkdir "$HOME/.local/lib") \
+(_mkdir "$HOME/.local/share/bash-completion/completions") \
 (_mkdir "$HOME/.config")
 
 _mkdir dir:

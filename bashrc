@@ -22,6 +22,8 @@ HISTFILESIZE=20000
 # Source global definitions
 [[ -f /etc/bashrc ]] && . /etc/bashrc
 
+. /etc/bash_completion
+
 # User specific environment
 
 alias ls="ls --color=auto"
