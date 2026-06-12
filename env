@@ -4,3 +4,4 @@ export LD_LIBRARY_PATH=$HOME/.local/lib:$LD_LIBRARY_PATH
 export MANPATH=$HOME/.local/share/man:$MANPATH
 export UV_CACHE_DIR=$HOME/.cache/uv
 export EDITOR=hx
+export _ZO_DATA_DIR="$HOME/.zoxide/share"

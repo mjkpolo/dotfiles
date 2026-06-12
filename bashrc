@@ -47,6 +47,7 @@ _scancel_fzf_completion() {
 complete -F _scancel_fzf_completion scancel
 
 eval "$(fzf --bash)"
+eval "$(zoxide init bash)"
 
 alias yacc="bison"
 alias today="date +%Y_%m_%d"

@@ -12,6 +12,15 @@ arch2 := if arch == "x86_64" { "amd64" } else { arch }
 JD := justfile_directory()
 GH := "https://github.com"
 
+zoxide_ver := "0.9.9"
+zoxide_fn := "zoxide-" + zoxide_ver + "-" + arch + "-unknown-" + os + "-musl"
+zoxide: \
+(_get_output GH + "/ajeetdsouza/zoxide/releases/download/v" + zoxide_ver + "/" + zoxide_fn + ".tar.gz" zoxide_fn "0") \
+(_mkdir parent_directory(env("_ZO_DATA_DIR"))) \
+(_mkdir ".zoxide/share") \
+(_link join(zoxide_fn, "zoxide") ".local/bin/zoxide") \
+(_link ".zoxide/share" ".zoxide/share")
+
 cmake_ver := "4.3.3"
 cmake_fn := "cmake-" + cmake_ver + "-" + os + "-" + arch
 cmake: \
@@ -127,7 +136,8 @@ texlab \
 lazygit \
 chafa \
 gitlfs \
-cmake
+cmake \
+zoxide
 
 setup: \
 (_mkdir "$HOME/.local/bin") \
