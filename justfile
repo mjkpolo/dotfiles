@@ -8,8 +8,16 @@ default: link-binaries
 
 os := os()
 arch := arch()
+arch2 := if arch == "x86_64" { "amd64" } else { arch }
 JD := justfile_directory()
 GH := "https://github.com"
+
+gitlfs_ver := "v3.7.1"
+gitlfs_fn := "git-lfs-" + os + "-" + arch2 + "-" + gitlfs_ver
+gitlfs: \
+    (_get_output GH + "/git-lfs/git-lfs/releases/download/" + gitlfs_ver + "/" + gitlfs_fn + ".tar.gz" gitlfs_fn "1") \
+    (_link join(gitlfs_fn, "git-lfs") ".local/bin/git-lfs")
+    git lfs install
 
 chafa_ver := "1.18.2-1"
 chafa_fn := "chafa-" + chafa_ver + "-" + arch + "-" + os + "-gnu"
@@ -20,7 +28,7 @@ chafa: \
 lazygit_ver := "0.62.2"
 lazygit_fn := "lazygit_" + lazygit_ver + "_" + os + "_" + arch
 lazygit: \
-    (_get_output GH + "/jesseduffield/lazygit/releases/download/v" + lazygit_ver + "/" + lazygit_fn + ".tar.gz" lazygit_fn) \
+    (_get_output GH + "/jesseduffield/lazygit/releases/download/v" + lazygit_ver + "/" + lazygit_fn + ".tar.gz" lazygit_fn "0") \
     (_link join(lazygit_fn, "lazygit") ".local/bin/lazygit")
 
 texlab_ver := "5.25.1"
@@ -64,8 +72,7 @@ fd: \
 (_link join(fd_fn, "fd") ".local/bin/fd")
 
 fzf_ver := "0.73.1"
-fzf_arch := if arch == "x86_64" { "amd64" } else { arch }
-fzf_fn := "fzf-" + fzf_ver + "-" + os + "_" + fzf_arch
+fzf_fn := "fzf-" + fzf_ver + "-" + os + "_" + arch2
 fzf: \
 (_get GH + "/junegunn/fzf/releases/download/v" + fzf_ver + "/" + fzf_fn + ".tar.gz") \
 (_link "fzf" ".local/bin/fzf")
@@ -127,10 +134,10 @@ _get url: setup
     tar -xf {{file_name(url)}}
     rm -f {{file_name(url)}}
 
-_get_output url output: setup
+_get_output url output strip: setup
     curl --proto '=https' --tlsv1.2 -sSfLO {{url}}
     mkdir -p {{output}}
-    tar -xf {{file_name(url)}} -C {{output}}
+    tar -xf {{file_name(url)}} -C {{output}} --strip-components={{strip}}
     rm -f {{file_name(url)}}
 
 _getbin url: setup
