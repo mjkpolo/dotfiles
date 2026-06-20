@@ -68,7 +68,7 @@ fuc: \
 (_link fuc_cpz_fn ".local/bin/cpz") \
 (_link fuc_rmz_fn ".local/bin/rmz")
 
-helix_ver := "1"
+helix_ver := "2"
 helix_fn := "helix-" + helix_ver + "-" + arch + "-" + os
 helix: \
 (_get GH + "/mjkpolo/helix/releases/download/" + helix_ver + "/" + helix_fn + ".tar.xz") \
