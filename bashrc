@@ -22,7 +22,10 @@ HISTFILESIZE=20000
 # Source global definitions
 [[ -f /etc/bashrc ]] && . /etc/bashrc
 
-. /etc/bash_completion
+# source: https://github.com/scop/bash-completion/blob/main/README.md#installation
+[[ ! ${BASH_COMPLETION_VERSINFO:-} &&
+  -f /usr/share/bash-completion/bash_completion ]] &&
+    . /usr/share/bash-completion/bash_completion
 
 # User specific environment
 
