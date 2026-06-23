@@ -117,7 +117,7 @@ uv: \
 link-dotfiles: \
 (_link "env" ".env") \
 (_link "bashrc" ".bashrc") \
-(_link "dotzellij" ".zellij") \
+(_link "dotzellij" ".config/zellij") \
 (_link "config.github" "config.github") \
 (_link "config.gitlab" "config.gitlab") \
 (_link "gitconfig" ".gitconfig") \
