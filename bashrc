@@ -32,7 +32,16 @@ HISTFILESIZE=20000
 alias ls="ls --color=auto"
 export GPG_TTY=$(tty)
 
-export PS1='[\[\e[1;35m\]\w\[\e[0m\]@\[\e[1;34m\]\H\[\e[0m\]]\n\$ '
+exitstatus() {
+  local s=$?
+  if [[ $s -eq 0 ]]; then
+    printf '\e[1;32m%s\e[0m' "$s"
+  else
+    printf '\e[1;31m%s\e[0m' "$s"
+  fi
+}
+
+PS1='[\[\e[1;35m\]\w\[\e[0m\]@\[\e[1;34m\]\H\[\e[0m\]] ($(exitstatus)) \t\n\$ '
 
 VIRTUAL_ENV_DISABLE_PROMPT=1
 . ~/.venv/bin/activate
@@ -52,7 +61,7 @@ _scancel_fzf_completion() {
 complete -F _scancel_fzf_completion scancel
 
 eval "$(fzf --bash)"
-eval "$(zoxide init bash)"
+eval "$(zoxide init bash --cmd cd)"
 
 alias yacc="bison"
 alias today="date +%Y_%m_%d"
