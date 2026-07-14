@@ -12,7 +12,7 @@ arch2 := if arch == "x86_64" { "amd64" } else { arch }
 JD := justfile_directory()
 GH := "https://github.com"
 
-zoxide_ver := "0.9.9"
+zoxide_ver := "0.10.0"
 zoxide_fn := "zoxide-" + zoxide_ver + "-" + arch + "-unknown-" + os + "-musl"
 zoxide: \
 (_get_output GH + "/ajeetdsouza/zoxide/releases/download/v" + zoxide_ver + "/" + zoxide_fn + ".tar.gz" zoxide_fn "0") \
@@ -41,13 +41,13 @@ chafa: \
 (_get "https://hpjansson.org/chafa/releases/static/" + chafa_fn + ".tar.gz") \
 (_link join(chafa_fn, "chafa") ".local/bin/chafa")
 
-lazygit_ver := "0.62.2"
+lazygit_ver := "0.63.0"
 lazygit_fn := "lazygit_" + lazygit_ver + "_" + os + "_" + arch
 lazygit: \
 (_get_output GH + "/jesseduffield/lazygit/releases/download/v" + lazygit_ver + "/" + lazygit_fn + ".tar.gz" lazygit_fn "0") \
 (_link join(lazygit_fn, "lazygit") ".local/bin/lazygit")
 
-texlab_ver := "5.25.1"
+texlab_ver := "5.26.0"
 texlab_fn := "texlab-" + arch + "-" + os
 texlab: \
 (_get GH + "/latex-lsp/texlab/releases/download/v" + texlab_ver + "/" + texlab_fn + ".tar.gz") \
@@ -59,7 +59,7 @@ btop: \
 (_get GH + "/aristocratos/btop/releases/download/" + btop_ver + "/" + btop_fn + ".tar.gz") \
 (_link "btop/bin/btop" ".local/bin/btop")
 
-fuc_ver := "3.1.1"
+fuc_ver := "3.2.0"
 fuc_cpz_fn := arch + "-unknown-" + os + "-gnu-cpz"
 fuc_rmz_fn := arch + "-unknown-" + os + "-gnu-rmz"
 fuc: \
@@ -90,7 +90,7 @@ fd: \
 (_link join(fd_fn, "fd") ".local/bin/fd") \
 (_link join(fd_fn, "autocomplete/fd.bash") ".local/share/bash-completion/completions/fd.bash")
 
-fzf_ver := "0.73.1"
+fzf_ver := "0.74.0"
 fzf_fn := "fzf-" + fzf_ver + "-" + os + "_" + arch2
 fzf: \
 (_get GH + "/junegunn/fzf/releases/download/v" + fzf_ver + "/" + fzf_fn + ".tar.gz") \
@@ -102,7 +102,7 @@ zellij: \
 (_get GH + "/mjkpolo/zellij/releases/download/" + zellij_ver + "/" + zellij_fn + ".tar.gz") \
 (_link "zellij" ".local/bin/zellij")
 
-uv_ver := "0.11.21"
+uv_ver := "0.11.28"
 uv_fn := "uv-" + arch + "-unknown-" + os + "-musl"
 uv: \
 (_get "https://releases.astral.sh/github/uv/releases/download/" + uv_ver + "/" + uv_fn + ".tar.gz") \
