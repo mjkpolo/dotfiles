@@ -12,6 +12,12 @@ arch2 := if arch == "x86_64" { "amd64" } else { arch }
 JD := justfile_directory()
 GH := "https://github.com"
 
+gdu_ver := "v5.36.1"
+gdu_fn := "gdu_linux_" + arch2 + "_static"
+gdu: \
+(_get GH + "/dundee/gdu/releases/download/" + gdu_ver + "/" + gdu_fn + ".tgz") \
+(_link gdu_fn ".local/bin/gdu")
+
 zoxide_ver := "0.10.0"
 zoxide_fn := "zoxide-" + zoxide_ver + "-" + arch + "-unknown-" + os + "-musl"
 zoxide: \
@@ -141,7 +147,8 @@ lazygit \
 chafa \
 gitlfs \
 cmake \
-zoxide
+zoxide \
+gdu
 
 setup: \
 (_mkdir "$HOME/.local/bin") \
