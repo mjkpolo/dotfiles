@@ -16,8 +16,9 @@ link-binaries \
 link-extra-binaries
 
 os := os()
+os2 := if os == "macos" { "darwin" } else { os }
 arch := arch()
-arch2 := if arch == "x86_64" { "amd64" } else { arch }
+arch2 := if arch == "x86_64" { "amd64" } else { if arch == "aarch64" { "arm64" } else { arch } }
 JD := justfile_directory()
 GH := "https://github.com"
 
@@ -42,13 +43,14 @@ monaspace: \
     fc-cache -fv
 
 gdu_ver := "v5.36.1"
-gdu_fn := "gdu_linux_" + arch2 + "_static"
+gdu_fn := "gdu_" + os2 + "_" + arch2
 gdu: \
 (_get_tar GH + "/dundee/gdu/releases/download/" + gdu_ver + "/" + gdu_fn + ".tgz") \
 (_link gdu_fn ".local/bin/gdu")
 
 zoxide_ver := "0.10.0"
-zoxide_fn := "zoxide-" + zoxide_ver + "-" + arch + "-unknown-" + os + "-musl"
+zoxide_suffix := if os == "macos" { "apple-darwin" } else { "unknown-linux-musl" }
+zoxide_fn := "zoxide-" + zoxide_ver + "-" + arch + "-" + zoxide_suffix
 zoxide: \
 (_get_output GH + "/ajeetdsouza/zoxide/releases/download/v" + zoxide_ver + "/" + zoxide_fn + ".tar.gz" zoxide_fn "0") \
 (_mkdir parent_directory(env("_ZO_DATA_DIR"))) \
@@ -63,10 +65,10 @@ cmake: \
 (_link join(cmake_fn, "bin/cmake") ".local/bin/cmake") \
 (_link join(cmake_fn, "share/bash-completion/completions/cmake") ".local/share/bash-completion/completions/cmake")
 
-gitlfs_ver := "v3.7.1"
-gitlfs_fn := "git-lfs-" + os + "-" + arch2 + "-" + gitlfs_ver
+gitlfs_ver := "v3.8.0"
+gitlfs_fn := "git-lfs-" + os2 + "-" + arch2 + "-" + gitlfs_ver
 gitlfs: \
-(_get_output GH + "/git-lfs/git-lfs/releases/download/" + gitlfs_ver + "/" + gitlfs_fn + ".tar.gz" gitlfs_fn "1") \
+(_get_zip GH + "/git-lfs/git-lfs/releases/download/" + gitlfs_ver + "/" + gitlfs_fn + ".zip") \
 (_link join(gitlfs_fn, "git-lfs") ".local/bin/git-lfs")
     git lfs install
 
@@ -76,8 +78,8 @@ chafa: \
 (_get_tar "https://hpjansson.org/chafa/releases/static/" + chafa_fn + ".tar.gz") \
 (_link join(chafa_fn, "chafa") ".local/bin/chafa")
 
-lazygit_ver := "0.63.0"
-lazygit_fn := "lazygit_" + lazygit_ver + "_" + os + "_" + arch
+lazygit_ver := "0.66.1"
+lazygit_fn := "lazygit_" + lazygit_ver + "_" + os2 + "_" + arch2
 lazygit: \
 (_get_output GH + "/jesseduffield/lazygit/releases/download/v" + lazygit_ver + "/" + lazygit_fn + ".tar.gz" lazygit_fn "0") \
 (_link join(lazygit_fn, "lazygit") ".local/bin/lazygit")
@@ -111,34 +113,38 @@ helix: \
 (_link join(helix_fn, "runtime") ".config/helix/runtime") \
 (_link join(helix_fn, "contrib/completion/hx.bash") ".local/share/bash-completion/completions/hx.bash")
 
-rg_ver := "15.1.0"
-rg_fn := "ripgrep-" + rg_ver + "-" + arch + "-unknown-" + os + "-musl"
+rg_ver := "15.2.0"
+rg_suffix := if os == "macos" { "apple-darwin" } else { "unknown-linux-musl" }
+rg_fn := "ripgrep-" + rg_ver + "-" + arch + "-" + rg_suffix
 rg: \
 (_get_tar GH + "/BurntSushi/ripgrep/releases/download/" + rg_ver + "/" + rg_fn + ".tar.gz") \
 (_link join(rg_fn, "rg") ".local/bin/rg") \
 (_link join(rg_fn, "complete/rg.bash") ".local/share/bash-completion/completions/rg.bash")
 
-fd_ver := "v10.4.2"
-fd_fn := "fd-" + fd_ver + "-" + arch + "-unknown-" + os + "-musl"
+fd_ver := "v10.5.0"
+fd_suffix := if os == "macos" { "apple-darwin" } else { "unknown-linux-musl" }
+fd_fn := "fd-" + fd_ver + "-" + arch + "-" + fd_suffix
 fd: \
 (_get_tar GH + "/sharkdp/fd/releases/download/" + fd_ver + "/" + fd_fn + ".tar.gz") \
 (_link join(fd_fn, "fd") ".local/bin/fd") \
 (_link join(fd_fn, "autocomplete/fd.bash") ".local/share/bash-completion/completions/fd.bash")
 
-fzf_ver := "0.74.0"
-fzf_fn := "fzf-" + fzf_ver + "-" + os + "_" + arch2
+fzf_ver := "0.74.5"
+fzf_fn := "fzf-" + fzf_ver + "-" + os2 + "_" + arch2
 fzf: \
 (_get_tar GH + "/junegunn/fzf/releases/download/v" + fzf_ver + "/" + fzf_fn + ".tar.gz") \
 (_link "fzf" ".local/bin/fzf")
 
 zellij_ver := "1"
-zellij_fn := "zellij-no-web-" + arch + "-unknown-" + os + "-musl"
+zellij_suffix := if os == "macos" { "apple-darwin" } else { "unknown-linux-musl" }
+zellij_fn := "zellij-no-web-" + arch + "-" + zellij_suffix
 zellij: \
 (_get_tar GH + "/mjkpolo/zellij/releases/download/" + zellij_ver + "/" + zellij_fn + ".tar.gz") \
 (_link "zellij" ".local/bin/zellij")
 
-uv_ver := "0.11.28"
-uv_fn := "uv-" + arch + "-unknown-" + os + "-musl"
+uv_ver := "0.13.0"
+uv_suffix := if os == "macos" { "apple-darwin" } else { "unknown-linux-musl" }
+uv_fn := "uv-" + arch + "-" + uv_suffix
 uv: \
 (_get_tar "https://releases.astral.sh/github/uv/releases/download/" + uv_ver + "/" + uv_fn + ".tar.gz") \
 (_mkdir ".cache/uv") \
@@ -169,8 +175,6 @@ fd \
 uv \
 fzf \
 zellij \
-fuc \
-btop \
 lazygit \
 gitlfs \
 zoxide \
@@ -178,6 +182,8 @@ gdu
 
 [parallel]
 link-extra-binaries: \
+btop \
+fuc \
 texlab \
 cmake \
 chafa \
