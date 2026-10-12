@@ -17,6 +17,7 @@ link-extra-binaries
 
 arch := arch()
 arch2 := if arch == "x86_64" { "amd64" } else { if arch == "aarch64" { "arm64" } else { arch } }
+arch3 := if arch == "x86_64" { "x64" } else { arch }
 JD := justfile_directory()
 GH := "https://github.com"
 
@@ -242,6 +243,21 @@ _get_uv: \
 _get_uv: \
 (_get_tar_output "https://releases.astral.sh/github/uv/releases/download/" + uv_ver + "/uv-" + arch + "-apple-darwin.tar.gz" uv_output "1")
 
+ltex_ls_plus_ver := "18.7.0"
+ltex_ls_plus_ver_output := "ltex-ls-plus-" + ltex_ls_plus_ver
+ltex_ls_plus: \
+_get_ltex_ls_plus \
+(_link join(ltex_ls_plus_ver_output, "bin/ltex-ls-plus") ".local/bin/ltex-ls-plus") \
+(_link join(ltex_ls_plus_ver_output, "bin/ltex-cli-plus") ".local/bin/ltex-cli-plus")
+
+[linux]
+_get_ltex_ls_plus: \
+(_get_tar "https://github.com/ltex-plus/ltex-ls-plus/releases/download/" + ltex_ls_plus_ver + "/ltex-ls-plus-" + ltex_ls_plus_ver + "-linux-" + arch3 + ".tar.gz")
+
+[macos]
+_get_ltex_ls_plus: \
+(_get_tar "https://github.com/ltex-plus/ltex-ls-plus/releases/download/" + ltex_ls_plus_ver + "/ltex-ls-plus-" + ltex_ls_plus_ver + "-mac-" + arch + ".tar.gz")
+
 [parallel]
 link-dotfiles: \
 (_link "env" ".env") \
@@ -271,6 +287,7 @@ gdu
 [parallel]
 link-extra-binaries: \
 texlab \
+ltex_ls_plus \
 cmake \
 monaspace \
 _link_extra_platform_binaries
